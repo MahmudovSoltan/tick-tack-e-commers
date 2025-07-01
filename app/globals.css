@@ -1,1 +1,22 @@
 @import "tailwindcss";
+
+.home_top_swiper .swiper-button-prev,
+.home_top_swiper .swiper-button-next {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #fff;
+  font-size: 16px;
+}
+.home_top_swiper .swiper-button-prev:after {
+  font-size: 20px;
+  font-weight: 600;
+  color: black;
+}
+
+.home_top_swiper .swiper-button-next::after {
+    font-size: 20px;
+  font-weight: 600;
+  color: black;
+}
+

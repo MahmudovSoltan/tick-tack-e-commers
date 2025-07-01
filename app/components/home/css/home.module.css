@@ -1,5 +1,127 @@
-.home_swiper_card{
-    background: linear-gradient(0deg, rgba(197,223,210,1) 0%, rgba(38,175,194,1) 9%, rgba(120,186,76,1) 76%);
-    height: 100vh;
-    width: 100%;
+.home_swiper_card {
+  background: linear-gradient(
+    0deg,
+    rgba(197, 223, 210, 1) 0%,
+    rgba(38, 175, 194, 1) 9%,
+    rgba(120, 186, 76, 1) 76%
+  );
+  height: 340px;
+  width: 100%;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+}
+.home_swiper_card_content {
+  padding-left: 50px;
+}
+.home_swiper_card_content h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: white;
+}
+.home_swiper_card_content p {
+  font-size: 18px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: white;
+  max-width: 350px;
+}
+.swiper_btn {
+  display: inline-block;
+  padding: 12px 24px;
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: rgb(122 213 226);
+  color: #ffff;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.spectial_cards {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.spectial_card {
+  background: linear-gradient(
+    0deg,
+    rgba(197, 223, 210, 1) 0%,
+    rgba(38, 175, 194, 1) 9%,
+    rgba(120, 186, 76, 1) 76%
+  );
+  height: 340px;
+  width: 100%;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+}
+.spectial_card_content {
+  padding-left: 50px;
+}
+.spectial_card_content h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: white;
+}
+.spectial_card_content p {
+  font-size: 18px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: white;
+  max-width: 350px;
+}
+.specialoffers_title {
+  font-size: 32px;
+  font-weight: 600;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  color: black;
+}
+.specialoffers_desc {
+  font-size: 24px;
+  color: black;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+.indicators_container h2 {
+  font-size: 32px;
+  font-weight: 600;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  color: black;
+}
+.indicators_container p {
+  font-size: 24px;
+  color: black;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+.indicators_cards{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 80px;
+}
+.indicators_card{
+    width: 25%;
+    border: 1px solid rgb(196, 196, 196);
+    border-radius: 10px;
+    padding: 15px;
+}
+.indicators_count{
+    font-size:48px !important;
+    font-weight: 500;
+    color: black;
+}
+.indicators_text{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between;
+
 }
