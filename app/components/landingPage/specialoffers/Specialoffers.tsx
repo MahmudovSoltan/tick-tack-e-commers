@@ -1,4 +1,4 @@
-import styles from '../css/home.module.css'
+import styles from '../css/landig.module.css'
 const Specialoffers = () => {
     return (
         <section>

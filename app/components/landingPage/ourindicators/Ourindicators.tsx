@@ -1,5 +1,5 @@
 import { PiMapPinSimpleAreaBold } from 'react-icons/pi';
-import styles from '../css/home.module.css'
+import styles from '../css/landig.module.css'
 import { AiTwotoneShop } from "react-icons/ai";
 import { LuShoppingBasket, LuSquareUser } from 'react-icons/lu';
 

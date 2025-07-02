@@ -1,5 +1,5 @@
 "use client"
-import styles from '../css/home.module.css'
+import styles from '../css/landig.module.css'
 import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 

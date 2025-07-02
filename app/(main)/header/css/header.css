@@ -25,5 +25,35 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 100%;
-  color: #2B3043;
+  color: #2b3043;
+}
+.adress_container {
+  width: 314px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background-color: #f6f5fb;
+}
+.addres_title {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #2b3043;
+  margin-bottom: 4px;
+}
+.addres_adress {
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 100%;
+  color: #2b3043;
+}
+.search_input {
+  width: 400px;
+  padding: 13px 25px;
+  border-radius: 10px;
+  background-color: #f6f5fb;
+}
+.search_input input {
+  outline: none;
+  width: 100%;
 }
