@@ -1,0 +1,27 @@
+.product_container {
+  background-color: #f6f5fb;
+  width: 100%;
+  min-height: 75vh;
+}
+.product_info_container {
+  width: 65%;
+  background-color: #ffff;
+  height: 60vh;
+  margin-top: 10px;
+  border-radius: 10px;
+  padding: 20px 40px;
+}
+.go_back {
+  width: max-content;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+  border-radius: 10px;
+  background-color: #f6f5fb;
+  padding: 10px 20px;
+  font-weight: 400;
+  font-size: 14px;
+  cursor: pointer;
+}

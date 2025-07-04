@@ -1,0 +1,60 @@
+.card_content {
+  width: 187px;
+  height: 251px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 10px 0px #0000001c;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 28px 17px 13px;
+}
+.card_image {
+  width: 118px;
+  height: 72px;
+  overflow: hidden;
+  margin-bottom: 37px;
+}
+.card_image Img {
+  border-radius: 5px;
+  width: 118px;
+  height: 72px;
+  object-fit: cover;
+
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.card_image Img:hover {
+  transform: scale(1.1);
+}
+.card_title {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #2b3043;
+  margin-bottom: 8px;
+}
+.card_price {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  color: #2b3043;
+  margin-bottom: 8px;
+}
+.add_basket_btn {
+  width: 153px;
+  height: 33px;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #76cb4f;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  color: #ffffff;
+  transition: all .3s ease-in-out;
+}
+.add_basket_btn:hover{
+      background-color: #46ab17;
+}
