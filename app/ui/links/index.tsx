@@ -9,12 +9,10 @@ const LinkComponent = ({ title }: linkProps) => {
 
     return (
         <div>
-            <div>
-                Ana Səhifə
+            <div className='link_content'>
+                <span>Ana Səhifə </span> /{title}
             </div>
-            {
-                title
-            }
+
         </div>
     )
 }
