@@ -6,7 +6,7 @@ const BasketTotalAmount = () => {
                 Yekun məbləğ
             </p>
             <div className="basket_total_amount_content">
-                <div>
+                <div className="basket_amount">
                     <div>
                         <p>
                             Ümumi
@@ -27,14 +27,17 @@ const BasketTotalAmount = () => {
                 </div>
                 <div>
 
-                    <div>
+                    <div className="last_ammount">
                         <p>
                             Yekun məbləğ
                         </p>
                         <p>
-
+                            13,65 AZN
                         </p>
                     </div>
+                    <button className="order_btn">
+                        Sifarişi tamamla
+                    </button>
                 </div>
             </div>
         </div>
