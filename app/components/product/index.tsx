@@ -3,6 +3,8 @@ import ComponentSidebar from "@/app/ui/componentSideBar"
 import sideBarImage from '@/app/assets/images/image 13.svg'
 import MyBasket from "@/app/ui/myBasket";
 import ProductInfo from "./ProductInfo";
+import EmptyBasket from "../basket/EmptyBasket";
+import EmptyProduct from "./EmptyProduct";
 const categories = [
     "Tərəvəzlər",
     "Qış meyvələri",
@@ -33,9 +35,11 @@ const ProductBody = () => {
                 </div>
                 <div className="categories_body_container">
                     <ComponentSidebar image={sideBarImage} links={categories} />
-                    <ProductInfo />
+                    {/* <ProductInfo /> */}
+                    <EmptyProduct />
                     <div>
-                        <MyBasket />
+                        {/* <MyBasket /> */}
+                        <EmptyBasket />
                     </div>
                 </div>
             </div>
