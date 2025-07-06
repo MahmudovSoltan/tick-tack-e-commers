@@ -1,0 +1,226 @@
+.checkout_body {
+  background-color: #f7f5fc;
+  padding-bottom: 50px;
+}
+.checkout_title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 100%;
+  color: #2b3043;
+  margin-bottom: 10px;
+  padding-left: 10px;
+}
+.checkout_left_container {
+  width: 60%;
+}
+.checkout_left_content {
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 40px;
+}
+.left_title {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 100%;
+  color: #2b3043;
+  margin-bottom: 8px;
+}
+.left_text {
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #2b3043;
+}
+.other_note {
+  width: 50%;
+}
+.textarea {
+  width: 100%;
+  height: 164px;
+  background-color: #f6f5fb;
+  padding: 20px;
+  border-radius: 10px;
+}
+.textarea textarea {
+  width: 100%;
+  height: 100%;
+  resize: none;
+  outline: none;
+}
+.order_choose {
+  border: 1px solid #f2f2f2;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.sircle_box {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid #2b3043;
+}
+.sircle_box span {
+  width: 18px;
+  height: 18px;
+  border-radius: 50px;
+  background: #2b304314;
+}
+.choose_text {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 100%;
+  color: #2b3043;
+}
+.active_choose {
+  background: #00be4614;
+  border: 1px solid #00be4614;
+  color: #00be46;
+}
+.active_text {
+  color: #00be46;
+}
+.active_box {
+  border: 1px solid #00be46;
+}
+.active_box span {
+  background-color: #00be46;
+}
+.acsept_btn {
+  width: 100%;
+  background-color: #2b3043;
+  width: 484px;
+  height: 60px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 52px;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 100%;
+}
+.checkout_right_content {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 40px 20px;
+  height: 357px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.user_product {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.user_product p {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 100%;
+  color: #2b3043;
+  margin-bottom: 16px;
+}
+.checkout_right_bottom {
+  border-top: 1px solid #eaeaea;
+  padding-top: 22px;
+}
+.user_paid_info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  gap: 14px;
+}
+.user_paid_info p {
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 100%;
+  color: #2b3043;
+}
+.custemer_last_sum {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.custemer_last_sum p {
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 100%;
+  color: #2b3043;
+}
+.confirm_modal_cotainer {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.owarlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #00000066;
+}
+.soncirm_modal_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  width: 50%;
+  padding: 60px;
+  z-index: 99;
+}
+.confirm_text {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 100%;
+  text-align: center;
+  color: #1a1d28;
+  margin-bottom: 10px;
+}
+.time {
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #1a1d28;
+}
+.modal_btns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+.modal_btns button {
+  width: 243px;
+  height: 60px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 100%;
+  border: 1px solid #9f9f9f59;
+  color: #9f9f9f59;
+}
+.modal_btns button:first-child {
+  background-color: #92d871;
+  color: #ffffff;
+  border: none;
+}
