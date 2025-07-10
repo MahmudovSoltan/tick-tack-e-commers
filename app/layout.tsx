@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import { Roboto as RobotoFont } from "next/font/google";
 import "./globals.css";
+import { Providers } from "./components/providers/providers";
 
 
 
 
 const roboto = RobotoFont(
   {
-      subsets: ["latin"],
-      weight:["300","400","500","600","700"]
+    subsets: ["latin"],
+    weight: ["300", "400", "500", "600", "700"]
     // Add your Roboto font options here if needed
   }
 )
@@ -28,7 +29,9 @@ export default function RootLayout({
       <body
         className={`${roboto.className} antialiased`}
       >
-        {children}
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );

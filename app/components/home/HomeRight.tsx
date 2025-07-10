@@ -1,5 +1,10 @@
+'use client'
+
 import Image from "next/image";
 import HomeCategoryCard from "./HomeCategoryCard";
+import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
+import { useEffect } from "react";
+import { getAllCategory } from "@/app/store/slices/categorySlice";
 
 
 
@@ -47,6 +52,12 @@ const categories = [
 ];
 
 const HomeRight = () => {
+    // const dispatch = useAppDispatch();
+    // const { categories } = useAppSelector((state) => state.categories)
+    // console.log(categories,'categories');
+    // useEffect(()=>{
+    //     dispatch(getAllCategory())
+    // },[])
     return (
         <div className="home_right_container">
             {

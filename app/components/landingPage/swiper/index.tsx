@@ -1,6 +1,5 @@
 "use client"
 import styles from '../css/landig.module.css'
-import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
@@ -10,24 +9,53 @@ import 'swiper/css/navigation';
 
 // import required modules
 import { Navigation, Autoplay } from 'swiper/modules';
-const SwiperCarusel = () => {
-    return (
+import Image from 'next/image';
 
+const SwiperCarusel = ({ data }) => {
+    const filtered = data?.data?.filter((item) => item.img_url).slice(1, 5);
+
+    const bg_url = "https://www.bigbasketco.com/wp-content/uploads/good-l-corp-what-americas-best-grocery-stores-have-in-common.jpg"
+    return (
         <section>
             <Swiper
                 slidesPerView={2}
                 spaceBetween={30}
                 loop={true}
                 navigation={true}
-                // autoplay={{
-                //     delay: 2000, // 3 saniyə sonra slayd dəyişəcək
-                //     disableOnInteraction: false, // istifadəçi toxunduqda dayanmaması üçün
-                // }}
+                autoplay={{
+                    delay: 2000,
+                    disableOnInteraction: false,
+                }}
                 modules={[Navigation, Autoplay]}
                 className={`mySwiper  home_top_swiper`}
 
             >
-                <SwiperSlide>
+
+                {
+                    filtered?.map((item) => (
+                        <SwiperSlide key={item.id}>
+                            <div className={styles.home_swiper_card} style={{ backgroundImage: `url(${bg_url})`,backgroundPosition:"center"}}>
+                                <div className={styles.home_swiper_card_content}>
+                                    <h2>{item.title}</h2>
+                                    <p>{item.description}</p>
+                                    <button className={styles.swiper_btn}>Ətraflı</button>
+                                </div>
+                                {/* <div className={styles.home_swiper_card_image}>
+                                    <Image
+                                        src={item.img_url}
+                                        width={200}
+                                        height={200}
+                                        alt={item.title}
+                                        className={styles.card_image}
+                                    />
+                                </div> */}
+                            </div>
+                        </SwiperSlide>
+
+                    ))
+                }
+
+                {/* <SwiperSlide>
                     <div className={styles.home_swiper_card}>
                         <div className={styles.home_swiper_card_content}>
                             <h2>
@@ -39,8 +67,8 @@ const SwiperCarusel = () => {
                             <button className={styles.swiper_btn}>Ətraflı</button>
                         </div>
                     </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </SwiperSlide> */}
+                {/* <SwiperSlide>
                     <div className={styles.home_swiper_card}>
                         <div className={styles.home_swiper_card_content}>
                             <h2>
@@ -49,36 +77,23 @@ const SwiperCarusel = () => {
                             <p>
                                 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo, cum.
                             </p>
-                                 <button className={styles.swiper_btn}>Ətraflı</button>
+                            <button className={styles.swiper_btn}>Ətraflı</button>
                         </div>
                     </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </SwiperSlide> */}
+                {/* <SwiperSlide>
                     <div className={styles.home_swiper_card}>
-                         <div className={styles.home_swiper_card_content}>
+                        <div className={styles.home_swiper_card_content}>
                             <h2>
                                 Tick tack e-commers
                             </h2>
                             <p>
                                 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo, cum.
                             </p>
-                                 <button className={styles.swiper_btn}>Ətraflı</button>
+                            <button className={styles.swiper_btn}>Ətraflı</button>
                         </div>
                     </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className={styles.home_swiper_card}>
-                                   <div className={styles.home_swiper_card_content}>
-                            <h2>
-                                Tick tack e-commers
-                            </h2>
-                            <p>
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo, cum.
-                            </p>
-                                 <button className={styles.swiper_btn}>Ətraflı</button>
-                        </div>
-                    </div>
-                </SwiperSlide>
+                </SwiperSlide> */}
 
             </Swiper>
 

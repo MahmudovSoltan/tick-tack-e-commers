@@ -1,3 +1,4 @@
+import Image from "next/image";
 
 
 const products = [
@@ -56,7 +57,7 @@ const OrderDetails = () => {
       <div className="product-list">
         {products.map((product, index) => (
           <div className="product-row" key={index}>
-            <img src={product.image} alt={product.name} />
+            <Image width={"200"} height={200} src={product.image} alt={product.name} />
             <p>{product.name}</p>
             <p>{product.count}</p>
             <p>{product.price}</p>

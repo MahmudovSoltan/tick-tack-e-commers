@@ -1,8 +1,32 @@
 
+"use client"
+
+import { useMyFormState } from "@/app/hooks/useForm";
+import { useAppDispatch } from "@/app/store/hooks";
+import { register } from "@/app/store/slices/authStore";
+import { ILoginFomtType } from "@/app/types/auth.type";
 
 
+const initialData = {
+    phone: "",
+    password: "",
+    full_name:""
+}
 const Regitser = () => {
+    const { data, handleChange, setData } = useMyFormState<ILoginFomtType>(initialData)
+    const dispatch = useAppDispatch();
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault()
+        try {
+            await dispatch(register(data))
+            console.log(data);
 
+             setData(initialData)
+        } catch (error) {
+            console.log(error);
+
+        }
+    }
     return (
         <div>
             <form className="form">

@@ -31,7 +31,7 @@ const ProductInfo = () => {
                     </h3>
                     <p>
                         Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry. Lorem Ipsum has been the industry's
+                        typesetting industry. Lorem Ipsum has been the industrys
                         standard dummy text ever since the
                     </p>
                     <div className="product_price">

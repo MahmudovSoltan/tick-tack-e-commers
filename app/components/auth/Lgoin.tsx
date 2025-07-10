@@ -1,14 +1,43 @@
+import { useMyFormState } from "@/app/hooks/useForm";
+import { useAppDispatch } from "@/app/store/hooks";
+import { login } from "@/app/store/slices/authStore";
+import { ILoginFomtType } from "@/app/types/auth.type";
+import React from "react";
+
+const initialData = {
+    phone: "",
+    password: "",
+}
 
 const Lgoin = () => {
+    const { data, handleChange, setData } = useMyFormState<ILoginFomtType>(initialData)
+        const dispatch = useAppDispatch();
+    const handleSubmit = async (e:React.FormEvent) => {
+        e.preventDefault()
+        try {
+             await dispatch(login(data))
+             
+             setData(initialData)
+         } catch (error) {
+            console.log(error);
+
+        }
+    }
     return (
         <div>
-            <form className="form">
+            <form className="form"  onSubmit={handleSubmit}>
                 <div className="form_inputs">
                     <label htmlFor="">
                         Telefon nömrəsi
                     </label>
                     <div className="form_input">
-                        <input type="number" placeholder="(+994) __ / ___ / __ / __" />
+                        <input
+                            type="text"
+                            name="phone"
+                            onChange={handleChange}
+                            value={data.phone}
+                            placeholder="(+994) __ / ___ / __ / __"
+                        />
                     </div>
                 </div>
                 <div className="form_inputs">
@@ -16,7 +45,13 @@ const Lgoin = () => {
                         Parol
                     </label>
                     <div className="form_input">
-                        <input type="password" placeholder="*********************" />
+                        <input
+                            type="password"
+                            placeholder="*********************"
+                            name="password"
+                            onChange={handleChange}
+                            value={data.password}
+                        />
                     </div>
                 </div>
                 <button type="submit" className="submit_btn">Tamamla</button>
