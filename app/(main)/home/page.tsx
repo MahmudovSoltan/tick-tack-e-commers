@@ -7,13 +7,11 @@ const Home = () => {
     <div >
       <div className="container mx-auto">
         <Header role="home" />
-
       </div>
       <section className="home_section">
         <div className="container mx-auto flex gap-8">
           <HomeLeft />
           <HomeRight />
-
         </div>
       </section>
     </div>

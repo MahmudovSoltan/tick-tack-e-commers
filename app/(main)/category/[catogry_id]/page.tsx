@@ -1,16 +1,17 @@
+
+
 import CategoriesBody from "@/app/components/categories/CategoriesBody";
 import Header from "../../header";
 import '../css/category.css'
 import LinkComponent from "@/app/ui/links";
 interface CategoryDetailPageProps {
   params: {
-    categoryId: string;
+    catogry_id: string;
   };
 }
 
 export default function CategoryDetailPage({ params }: CategoryDetailPageProps) {
-  const { categoryId } = params;
-
+  const { catogry_id } = params;
 
 
   return (
@@ -21,8 +22,8 @@ export default function CategoryDetailPage({ params }: CategoryDetailPageProps) 
       </div>
       <section className="categories_container">
         <div className="container mx-auto">
-          <LinkComponent title="Meyvələr"/>
-          <CategoriesBody />
+          <LinkComponent title="Meyvələr" />
+          <CategoriesBody id={catogry_id} />
         </div>
       </section>
 

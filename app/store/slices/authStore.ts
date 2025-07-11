@@ -22,17 +22,15 @@ const initialState: AuthState = {
 export const login = createAsyncThunk(
   "auth/login",
   async (data: ILoginFomtType, thunkAPI) => {
-    console.log(data)
     try {
-      const response = await axiosInstance.post("/api/tiktak/auth/login", {
-        data
-      });
+      const response = await axiosInstance.post("/api/tiktak/auth/login", data);
 
-      const access_token = response.data.tokens.access_token;
-      const refresh_token = response.data.tokens.refresh_token;
+      const access_token = response.data.data.tokens.access_token;
+      const refresh_token = response.data.data.tokens.refresh_token;
 
       const user = response.data.profile;
-              
+
+
       localStorage.setItem("access_token", access_token);
       localStorage.setItem("refresh_token", refresh_token);
       return { user, access_token, refresh_token };
@@ -40,24 +38,32 @@ export const login = createAsyncThunk(
       return thunkAPI.rejectWithValue(error.response?.data?.message || "Giriş zamanı xəta baş verdi.");
     }
   }
-  
+
 );
 
 // 🔏 REGISTER
 export const register = createAsyncThunk(
   "auth/register",
-  async (
-    data: ILoginFomtType,
-    thunkAPI
-  ) => {
+  async (data: ILoginFomtType, thunkAPI) => {
     try {
-      const response = await axiosInstance.post("/api/tiktak/auth/signup", {
-        data
-      });
-            
+      const response = await axiosInstance.post("/api/tiktak/auth/signup", data); // 👈 Bükmə yoxdur
+      const { tokens, profile } = response.data;
 
+      // Əgər backend token göndərirsə
+      if (tokens) {
+        localStorage.setItem("access_token", tokens.access_token);
+        localStorage.setItem("refresh_token", tokens.refresh_token);
+      }
+
+      return {
+        user: profile,
+        access_token: tokens?.access_token ?? null,
+        refresh_token: tokens?.refresh_token ?? null,
+      };
     } catch (error: any) {
-      return thunkAPI.rejectWithValue(error.response?.data?.message || "Qeydiyyat zamanı xəta baş verdi.");
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || "Qeydiyyat zamanı xəta baş verdi."
+      );
     }
   }
 );

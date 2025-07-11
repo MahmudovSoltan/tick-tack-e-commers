@@ -52,18 +52,17 @@ const categories = [
 ];
 
 const HomeRight = () => {
-    // const dispatch = useAppDispatch();
-    // const { categories } = useAppSelector((state) => state.categories)
-    // console.log(categories,'categories');
-    // useEffect(()=>{
-    //     dispatch(getAllCategory())
-    // },[])
+    const dispatch = useAppDispatch();
+    const { categories } = useAppSelector((state) => state.categories)
+    useEffect(()=>{
+        dispatch(getAllCategory())
+    },[])
     return (
         <div className="home_right_container">
             {
-                categories.map((category, index) => (
+                categories?.data?.map((category, index) => (
 
-                    <HomeCategoryCard key={index} title={category.title} image={category.image} />
+                    <HomeCategoryCard id={category.id} key={index} title={category.name} image={category.img_url} />
 
                 ))
             }

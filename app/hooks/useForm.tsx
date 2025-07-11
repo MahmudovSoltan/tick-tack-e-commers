@@ -1,9 +1,8 @@
-"use client"
+"use client";
 
 import { useState } from "react";
 
-
-export const useMyFormState = <T extends Record<string,string>>(initialData: T) => {
+export const useMyFormState = <T extends Record<string, string>>(initialData: T) => {
   const [data, setData] = useState<T>(initialData);
 
   const handleChange = (
@@ -11,7 +10,7 @@ export const useMyFormState = <T extends Record<string,string>>(initialData: T) 
   ) => {
     const { name, value } = e.target;
 
-    setData(prev => ({
+    setData((prev) => ({
       ...prev,
       [name]: value,
     }));
@@ -19,5 +18,3 @@ export const useMyFormState = <T extends Record<string,string>>(initialData: T) 
 
   return { data, setData, handleChange };
 };
-
-

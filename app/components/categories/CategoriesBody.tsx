@@ -3,7 +3,11 @@ import ComponentSidebar from "@/app/ui/componentSideBar"
 import sideBarImage from '@/app/assets/images/image 13.svg'
 import Card from "@/app/ui/card";
 import MyBasket from "@/app/ui/myBasket";
-const categories = [
+import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
+import { getAllCategory } from "@/app/store/slices/categorySlice";
+import { useEffect } from "react";
+import { fetchProducts } from "@/app/store/slices/productSlice";
+const categorie = [
   "Tərəvəzlər",
   "Qış meyvələri",
   "Dietik Batonlar",
@@ -47,7 +51,19 @@ const fruits = [
 
 ];
 
-const CategoriesBody = () => {
+const CategoriesBody = ({ id }: number) => {
+
+
+  const dispatch = useAppDispatch();
+  const { products } = useAppSelector((state) => state.products)
+  const { categories } = useAppSelector((state) => state.categories)
+  const filterData = categories?.data?.filter((category) => category.id == id)
+  useEffect(() => {
+    dispatch(getAllCategory())
+    dispatch(fetchProducts())
+  }, [id])
+  console.log( products,filterData);
+
   return (
     <div>
       <div>
@@ -64,7 +80,7 @@ const CategoriesBody = () => {
 
         </div>
         <div className="categories_body_container">
-          <ComponentSidebar image={sideBarImage} links={categories} />
+          <ComponentSidebar image={sideBarImage} links={categorie} />
           <div className="category_cards">
             {
               fruits?.map((fruit, i) => (
