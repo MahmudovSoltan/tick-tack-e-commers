@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../utils/axiosInstance";
 import { ILoginFomtType } from "@/app/types/auth.type";
+import { toast } from "react-toastify";
 
 interface AuthState {
   user: any;
@@ -30,11 +31,12 @@ export const login = createAsyncThunk(
 
       const user = response.data.profile;
 
-
+      toast.success("Daxil oldunuz ")
       localStorage.setItem("access_token", access_token);
       localStorage.setItem("refresh_token", refresh_token);
       return { user, access_token, refresh_token };
     } catch (error: any) {
+      toast.error("Daxil ola bilmədiz ")
       return thunkAPI.rejectWithValue(error.response?.data?.message || "Giriş zamanı xəta baş verdi.");
     }
   }
@@ -54,13 +56,14 @@ export const register = createAsyncThunk(
         localStorage.setItem("access_token", tokens.access_token);
         localStorage.setItem("refresh_token", tokens.refresh_token);
       }
-
+      toast.success("Qeydiyyatdan keçdiz")
       return {
         user: profile,
         access_token: tokens?.access_token ?? null,
         refresh_token: tokens?.refresh_token ?? null,
       };
     } catch (error: any) {
+      toast.error("Qeydiyyatdan keçə bilmədiz ")
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || "Qeydiyyat zamanı xəta baş verdi."
       );

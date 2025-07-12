@@ -1,17 +1,17 @@
 import BasketProduct from "./BasketProduct"
 
-const BaksetLeft = () => {
+const BaksetLeft = ({products}) => {
     return (
         <div className="basket_left_container">
             <div className="basket_let_top">
                 <p className="basket_left_title">
                     Səbətim
                 </p>
-                <p className="basket_p">
+                <p className="basket_p cursor-pointer">
                     Səbəti təmizlə
                 </p>
             </div>
-            <BasketProduct/>
+            <BasketProduct products={products} />
         </div>
     )
 }

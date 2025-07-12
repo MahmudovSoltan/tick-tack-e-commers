@@ -50,12 +50,12 @@ const AccountInfo = () => {
                 </div>
                 <div>
                     <div className="mb-5">
-                    <h3 className="accunt_info_title !mb-0">
-                        Şifrənin yenilənməsi
-                    </h3>
-                    <p className="accoun_bottom_text">
-                        Ehtiyac yoxdursa boş buraxın
-                    </p>
+                        <h3 className="accunt_info_title !mb-0">
+                            Şifrənin yenilənməsi
+                        </h3>
+                        <p className="accoun_bottom_text">
+                            Ehtiyac yoxdursa boş buraxın
+                        </p>
 
                     </div>
                     <div className="flex items-center gap-8 justify-between">

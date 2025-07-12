@@ -100,32 +100,30 @@
   font-weight: 500;
   margin-bottom: 30px;
 }
-.indicators_cards{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 30px;
-    margin-bottom: 80px;
+.indicators_cards {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 80px;
 }
-.indicators_card{
-    width: 25%;
-    border: 1px solid rgb(196, 196, 196);
-    border-radius: 10px;
-    padding: 15px;
+.indicators_card {
+  width: 25%;
+  border: 1px solid rgb(196, 196, 196);
+  border-radius: 10px;
+  padding: 15px;
 }
-.indicators_count{
-    font-size:48px !important;
-    font-weight: 500;
-    color: black;
+.indicators_count {
+  font-size: 48px !important;
+  font-weight: 500;
+  color: black;
 }
-.indicators_text{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    justify-content: space-between;
-
+.indicators_text {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
 }
-
 
 .home_swiper_card {
   background: linear-gradient(
@@ -198,5 +196,3 @@
 .swiper_btn:hover {
   background-color: rgb(90, 180, 200);
 }
-
-

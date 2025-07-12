@@ -7,7 +7,7 @@ interface PropsType {
 
 const AuthRIghtHeader = ({ setTab, tab }: PropsType) => {
     console.log(tab);
-    
+
     return (
         <div>
             <ul className="auth_header_container">

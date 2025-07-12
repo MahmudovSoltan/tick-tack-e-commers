@@ -3,20 +3,20 @@ import '@/app/(main)/category/css/category.css'
 interface ComponentSidebarPropsType {
     links: string[],
     image: string,
+    currentCategory:string[]
 
 }
-const ComponentSidebar = ({ links, image }: ComponentSidebarPropsType) => {
+const ComponentSidebar = ({ links, image,currentCategory }: ComponentSidebarPropsType) => {
+    console.log(currentCategory);
+    
     return (
-        <aside >
+        <aside className="w-[300px]">
             <div className="aside_top">
-            <h4 className="categories_sub_title">
-                Meyvələr
-            </h4>
             <ul className="aside_links">
                 {
                     links?.map((link, index) => (
-                        <li key={index}>
-                            {link}
+                        <li key={index}  className={`${link.name === currentCategory && "categories_sub_title" }`}>
+                            {link?.name}
                         </li>
                     ))
                 }

@@ -1,6 +1,5 @@
 import axiosInstance from '@/app/utils/axiosInstance';
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import axios from 'axios';
 
 export interface Product {
   id: number;
@@ -27,7 +26,7 @@ export const fetchProducts = createAsyncThunk<Product[]>(
   async (_, thunkAPI) => {
     try {
       const response = await axiosInstance.get('/api/tiktak/products');
-      return response.data;
+      return response.data.data;
     } catch (error: any) {
       return thunkAPI.rejectWithValue(error.message);
     }

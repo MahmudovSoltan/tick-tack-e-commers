@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import campingReduser from './slices/campingSlice'
 import categoryReduser from './slices/categorySlice'
 import productReduser from './slices/productSlice'
+import basketReduser from './slices/basketSlice'
 export const store = configureStore({
     reducer: {
         campings: campingReduser,
         categories: categoryReduser,
-        products:productReduser
+        products:productReduser,
+        baskets:basketReduser
     },
 });
 

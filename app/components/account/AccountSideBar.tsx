@@ -2,14 +2,14 @@ import { Dispatch, SetStateAction } from "react"
 
 
 interface PropsType {
-    setTab:Dispatch<SetStateAction<number>>,
-    tab:number
+    setTab: Dispatch<SetStateAction<number>>,
+    tab: number
 }
-const AccountSideBar = ({tab,setTab}:PropsType) => {
+const AccountSideBar = ({ tab, setTab }: PropsType) => {
     return (
-        <div  className="account_aside_container">
+        <div className="account_aside_container">
             <ul>
-                <li onClick={()=>setTab(0)} className={`${tab === 0 && "active"}`}>
+                <li onClick={() => setTab(0)} className={`${tab === 0 && "active"}`}>
                     <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clipPath="url(#clip0_10_8669)">
                             <path d="M11.3369 -0.150391C12.8985 -0.150328 14.2543 0.411866 15.3594 1.5166C16.4645 2.62187 17.0263 3.97768 17.0264 5.53906C17.0264 7.10113 16.4642 8.4575 15.3594 9.5625C14.2543 10.6674 12.8986 11.2294 11.3369 11.2295C9.77537 11.2295 8.41882 10.6673 7.31348 9.5625C6.20856 8.45752 5.64648 7.10106 5.64648 5.53906C5.64657 3.97754 6.20861 2.6215 7.31348 1.5166C8.41849 0.41159 9.77486 -0.150391 11.3369 -0.150391ZM11.3369 1.49805C10.2089 1.49805 9.27763 1.88365 8.47949 2.68164C7.68118 3.47995 7.295 4.41144 7.29492 5.53906C7.29492 6.66721 7.68111 7.59925 8.47949 8.39746C9.27799 9.19545 10.2093 9.58105 11.3369 9.58105C12.4647 9.581 13.3961 9.19566 14.1943 8.39746C14.9926 7.59906 15.3789 6.6672 15.3789 5.53906C15.3788 4.41144 14.9925 3.47995 14.1943 2.68164C13.396 1.88359 12.4647 1.49811 11.3369 1.49805Z" fill="currentColor" stroke="currentColor" strokeWidth="0.3" />
@@ -24,7 +24,7 @@ const AccountSideBar = ({tab,setTab}:PropsType) => {
                     Hesab məlumatlarım
                 </li>
 
-                <li onClick={()=>setTab(1)} className={`${tab === 1 && "active"}`}>
+                <li onClick={() => setTab(1)} className={`${tab === 1 && "active"}`}>
                     <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clipPath="url(#clip0_10_8672)">
                             <path d="M20.7767 8.53388L10.8224 1.24553C10.6304 1.10501 10.3696 1.10501 10.1778 1.24553L0.223354 8.53388C-0.0197868 8.71193 -0.072615 9.05334 0.105434 9.29648C0.283483 9.53962 0.624938 9.59237 0.868037 9.4144L10.5 2.36201L20.132 9.41436C20.2291 9.48552 20.342 9.51977 20.4539 9.51977C20.6219 9.51977 20.7877 9.44246 20.8946 9.29644C21.0727 9.05334 21.0198 8.71193 20.7767 8.53388Z" fill="currentColor" />

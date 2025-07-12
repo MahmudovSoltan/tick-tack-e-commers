@@ -5,64 +5,45 @@ import Card from "@/app/ui/card";
 import MyBasket from "@/app/ui/myBasket";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import { getAllCategory } from "@/app/store/slices/categorySlice";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { fetchProducts } from "@/app/store/slices/productSlice";
-const categorie = [
-  "Tərəvəzlər",
-  "Qış meyvələri",
-  "Dietik Batonlar",
-  "Xlebçı",
-  "Diabetik Məhsullar",
-  "Dietik İçkilər",
-  "Qlütensiz Məhsullar",
-]
+import imgage from '@/app/assets/images/Group 42.svg'
+import Image from "next/image";
+import { addBasketFunc, deleteProduct, getAllBasketProducts } from "@/app/store/slices/basketSlice";
+import { ToastContainer } from "react-toastify";
+import debounce from 'lodash/debounce';
 
-const fruits = [
-  {
-    title: "Alma",
-    price: 1.2,
-    image: "https://cdn.pixabay.com/photo/2014/02/01/17/28/apple-256261_1280.jpg",
-  },
-  {
-    title: "Armud",
-    price: 1.5,
-    image: "https://cdn.pixabay.com/photo/2016/08/08/15/19/pears-1578745_1280.jpg",
-  },
-  {
-    title: "Banan",
-    price: 2.0,
-    image: "https://cdn.pixabay.com/photo/2018/06/04/19/51/bananas-3450176_1280.jpg",
-  },
-  {
-    title: "Portağal",
-    price: 1.8,
-    image: "https://cdn.pixabay.com/photo/2017/01/20/15/06/oranges-1995056_1280.jpg",
-  },
-  {
-    title: "Kivi",
-    price: 2.3,
-    image: "https://cdn.pixabay.com/photo/2018/06/07/20/51/kiwi-3462841_1280.jpg",
-  },
-  {
-    title: "Üzüm",
-    price: 2.7,
-    image: "https://cdn.pixabay.com/photo/2016/10/02/22/17/grapes-1716311_1280.jpg",
-  },
-
-];
-
-const CategoriesBody = ({ id }: number) => {
+const CategoriesBody = ({ id }: string) => {
 
 
   const dispatch = useAppDispatch();
   const { products } = useAppSelector((state) => state.products)
   const { categories } = useAppSelector((state) => state.categories)
-  const filterData = categories?.data?.filter((category) => category.id == id)
+
+  const currentCategory = categories?.data?.find((category) => category.id == id)
+  const filterProduct = products.filter((product) => product.category.id == id)
+  const { baskets } = useAppSelector((state) => state.baskets)
+  const addbasket = useMemo(() => {
+    return debounce(async (id: string) => {
+      await dispatch(addBasketFunc(id));
+      await dispatch(getAllBasketProducts());
+    }, 500);
+  }, [dispatch]);
+  const deleteProductFunc = useMemo(() => {
+    return debounce(async (id: string) => {
+      await dispatch(deleteProduct(id));
+      await dispatch(getAllBasketProducts());
+    }, 500);
+  }, [dispatch]);
+
+
+
+
   useEffect(() => {
+    dispatch(getAllBasketProducts())
     dispatch(getAllCategory())
     dispatch(fetchProducts())
-  }, [id])
-  console.log( products,filterData);
+  }, [id, addbasket])
 
   return (
     <div>
@@ -71,7 +52,7 @@ const CategoriesBody = ({ id }: number) => {
           <h2 className="categories_title">
             Kateqorialar
           </h2>
-          <div className="w-[375px] flex items-center justify-start">
+          <div className="w-[330px] flex items-center justify-start">
             <h2 className="categories_title">
               Səbətim
             </h2>
@@ -80,17 +61,41 @@ const CategoriesBody = ({ id }: number) => {
 
         </div>
         <div className="categories_body_container">
-          <ComponentSidebar image={sideBarImage} links={categorie} />
+          <ComponentSidebar image={sideBarImage} links={categories?.data} currentCategory={currentCategory?.name} />
           <div className="category_cards">
             {
-              fruits?.map((fruit, i) => (
-                <Card key={i} image={fruit.image} onclik={() => { }} price={fruit.price} title={fruit.title} />
-              ))
+              filterProduct?.length > 0 ? filterProduct?.map((product, i) => (
+                <Card
+                  key={i}
+                  image={product?.img_url}
+                  onclik={() => addbasket(product.id)}
+                  price={product.price}
+                  title={product?.title}
+                  id={product.id}
+                  baskets={baskets}
+                  deleteProductFunc={deleteProductFunc}
+                />
+              )) : <div className="empty_product">
+                <Image
+                  src={imgage}
+                  width={208}
+                  height={208}
+                  alt="empty_category"
+                  objectFit="cover"
+                />
+                <p>
+                  Bu kateqoriyada məhsul yoxdur
+                </p>
+              </div>
             }
+
+
+
           </div>
           <div>
 
-            <MyBasket />
+            <MyBasket baskets={baskets} deleteProduct={deleteProductFunc} addbasket={addbasket} />
+            <ToastContainer />
           </div>
         </div>
       </div>

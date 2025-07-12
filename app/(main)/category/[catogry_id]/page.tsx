@@ -18,7 +18,6 @@ export default function CategoryDetailPage({ params }: CategoryDetailPageProps) 
     <div>
       <div className="container mx-auto">
         <Header role="" />
-
       </div>
       <section className="categories_container">
         <div className="container mx-auto">

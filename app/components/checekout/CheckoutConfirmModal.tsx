@@ -1,21 +1,28 @@
 "use client"
 import { useCountdown } from "@/app/hooks/useCountdown"
-import { Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction, useEffect } from "react"
 
 interface PropsType {
-    setIsModal:Dispatch<SetStateAction <boolean>>
+  setIsModal: Dispatch<SetStateAction<boolean>>
 }
-const CheckoutConfirmModal = ({setIsModal}:PropsType) => {
-    const time = useCountdown(180)
+
+const CheckoutConfirmModal = ({ setIsModal }: PropsType) => {
+  const time = useCountdown(180)
+
+  // Bu useEffect yalnız clientdə işləyəcək
+  useEffect(() => {
     if (time === "00:00") {
-        setIsModal(false)
+      setIsModal(false)
     }
-    return (
-        <div className="confirm_modal_cotainer">
-            <div onClick={()=>setIsModal(false)} className="owarlay"></div>
-            <div className="soncirm_modal_content">
-                <div>
-                    <svg width="294" height="230" viewBox="0 0 294 230" fill="none" xmlns="http://www.w3.org/2000/svg">
+  }, [time, setIsModal])
+
+  return (
+    <div className="confirm_modal_cotainer">
+      <div onClick={() => setIsModal(false)} className="owarlay"></div>
+      <div className="soncirm_modal_content">
+        <div>
+          {/* SVG burda qalır – istəsən ayrıca komponentə bölə bilərsən */}
+                   <svg width="294" height="230" viewBox="0 0 294 230" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path opacity="0.1" d="M30.9689 22.9388C29.0525 23.7338 27.0857 24.7543 26.0325 26.5431C24.9171 28.4328 25.0506 30.7793 25.2583 32.9657C27.0679 51.9277 31.8352 72.0941 23.6029 89.2703C19.6069 97.6032 12.9232 104.281 7.60715 111.848C2.29104 119.416 -1.72273 128.864 0.745457 137.767C3.7595 148.645 15.0088 154.676 22.5913 163.048C27.5544 168.521 31.0342 175.172 35.665 180.93C40.2958 186.688 46.6413 191.761 54.034 192.099C64.6663 192.588 73.3168 183.407 83.7413 181.28C94.421 179.103 105.175 184.644 113.834 191.277C122.494 197.91 130.37 205.947 140.459 210.088C151.602 214.665 164.162 213.965 175.892 216.715C186.572 219.222 196.403 224.553 207.005 227.395C217.608 230.237 230.035 230.064 238.249 222.805C248.956 213.312 248.113 196.403 254.951 183.846C261.303 172.179 273.736 165.213 282.104 154.899C297.163 136.334 296.67 107.959 283.884 87.7692C271.098 67.5791 247.938 55.354 224.256 52.1709C213.576 50.7381 202.579 50.9339 192.312 47.6737C164.83 38.9521 148.475 7.70273 120.417 1.20011C102.582 -2.92632 85.2365 4.22003 70.0447 13.0158C56.8582 20.6516 44.6923 17.246 30.9689 22.9388Z" fill="#92D871" />
                         <path d="M57.7521 84.2012C57.7521 84.2012 47.6272 93.7563 36.7606 94.0411C32.1975 94.132 27.7869 95.7007 24.1912 98.5117C22.4917 99.8552 20.9187 101.352 19.4922 102.982" stroke="#535461" strokeWidth="2" strokeMiterlimit="10" />
                         <path d="M12.6375 103.215C14.0971 102.473 19.6687 102.966 19.6687 102.966C19.6687 102.966 16.7791 107.757 15.3194 108.499C14.9699 108.706 14.5814 108.839 14.1783 108.89C13.7751 108.941 13.3657 108.908 12.9756 108.794C12.5855 108.681 12.2229 108.488 11.9104 108.228C11.5979 107.968 11.342 107.647 11.1587 107.285C10.9754 106.922 10.8686 106.525 10.8449 106.12C10.8212 105.714 10.8811 105.308 11.0208 104.926C11.1606 104.545 11.3773 104.196 11.6574 103.901C11.9375 103.607 12.2752 103.373 12.6494 103.215H12.6375Z" fill="#6FBF4A" />
@@ -76,22 +83,18 @@ const CheckoutConfirmModal = ({setIsModal}:PropsType) => {
                             </linearGradient>
                         </defs>
                     </svg>
-                </div>
-                <div>
-                    <div className="confirm_text">
-                        Sifarişinizi tesdiqləyiniz
-                    </div>
-                    <p className="time">
-                        vaxtın bitməsinə {time} qaldı
-                    </p>
-                </div>
-                <div className="modal_btns">
-                    <button>Təsdiqlə</button>
-                    <button onClick={()=>setIsModal(false)}>İndi yox</button>
-                </div>
-            </div>
         </div>
-    )
+        <div>
+          <div className="confirm_text">Sifarişinizi təsdiqləyiniz</div>
+          <p className="time">Vaxtın bitməsinə {time} qaldı</p>
+        </div>
+        <div className="modal_btns">
+          <button>Təsdiqlə</button>
+          <button onClick={() => setIsModal(false)}>İndi yox</button>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export default CheckoutConfirmModal

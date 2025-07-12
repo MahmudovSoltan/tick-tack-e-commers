@@ -2,6 +2,7 @@ import { useMyFormState } from "@/app/hooks/useForm";
 import { useAppDispatch } from "@/app/store/hooks";
 import { login } from "@/app/store/slices/authStore";
 import { ILoginFomtType } from "@/app/types/auth.type";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const initialData = {
@@ -11,21 +12,22 @@ const initialData = {
 
 const Lgoin = () => {
     const { data, handleChange, setData } = useMyFormState<ILoginFomtType>(initialData)
-        const dispatch = useAppDispatch();
-    const handleSubmit = async (e:React.FormEvent) => {
+    const dispatch = useAppDispatch();
+    const navigate = useRouter()
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         try {
-             await dispatch(login(data))
-             
-             setData(initialData)
-         } catch (error) {
+            await dispatch(login(data))
+            setData(initialData)
+            navigate.push("/home")
+        } catch (error) {
             console.log(error);
 
         }
     }
     return (
         <div>
-            <form className="form"  onSubmit={handleSubmit}>
+            <form className="form" onSubmit={handleSubmit}>
                 <div className="form_inputs">
                     <label htmlFor="">
                         Telefon nömrəsi

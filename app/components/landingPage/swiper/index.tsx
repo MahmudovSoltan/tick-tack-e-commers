@@ -10,11 +10,22 @@ import 'swiper/css/navigation';
 // import required modules
 import { Navigation, Autoplay } from 'swiper/modules';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 const SwiperCarusel = ({ data }) => {
     const filtered = data?.data?.filter((item) => item.img_url).slice(1, 5);
-
+    const navigate = useRouter()
     const bg_url = "https://www.bigbasketco.com/wp-content/uploads/good-l-corp-what-americas-best-grocery-stores-have-in-common.jpg"
+    const user = localStorage.getItem("access_token")
+    const handleNavigate = () => {
+        console.log(user);
+        if (user) {
+            navigate.push("/home")
+        }  else if (!user){
+            navigate.push("/auth")
+        }
+
+    }
     return (
         <section>
             <Swiper
@@ -34,11 +45,11 @@ const SwiperCarusel = ({ data }) => {
                 {
                     filtered?.map((item) => (
                         <SwiperSlide key={item.id}>
-                            <div className={styles.home_swiper_card} style={{ backgroundImage: `url(${bg_url})`,backgroundPosition:"center"}}>
+                            <div className={styles.home_swiper_card} style={{ backgroundImage: `url(${bg_url})`, backgroundPosition: "center" }}>
                                 <div className={styles.home_swiper_card_content}>
                                     <h2>{item.title}</h2>
                                     <p>{item.description}</p>
-                                    <button className={styles.swiper_btn}>Ətraflı</button>
+                                    <button className={styles.swiper_btn} onClick={handleNavigate}>Ətraflı</button>
                                 </div>
                                 {/* <div className={styles.home_swiper_card_image}>
                                     <Image

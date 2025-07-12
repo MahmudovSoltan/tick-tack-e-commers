@@ -3,6 +3,27 @@
   width: 100%;
   min-height: 75vh;
 }
+.empty_product {
+  background-color: #ffffff;
+  width: 600px;
+  height: 368px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  border-radius: 10px;
+  padding-top: 50px;
+  padding-bottom: 30px;
+  box-shadow: 0px 0px 10px 0px #0000001c;
+}
+.empty_product p {
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 100%;
+  text-align: center;
+  color: #e6e6e6;
+}
 .aside_top {
   /* width: 338px; */
   min-height: 348px;
@@ -28,23 +49,25 @@
 .aside_links li {
   position: relative;
   width: max-content;
-  padding-bottom: 3px; /* xəttə yer ayırır */
+  padding-bottom: 3px;
 }
-
-.aside_links li::after {
+.aside_links li:hover {
+  color: #2b3043;
+}
+/* .aside_links li::after {
   content: "";
   position: absolute;
   left: 0;
   bottom: 0;
   width: 0;
   height: 3px;
-  background-color: #60a5fa;
+  background-color: #76CB4F;
   transition: width 0.3s ease-in-out;
-}
-
+} */
+/* 
 .aside_links li:hover::after {
   width: 100%;
-}
+} */
 .categories_title {
   font-weight: 700;
   font-size: 24px;
@@ -72,4 +95,5 @@
   gap: 20px;
   height: max-content;
   margin-top: 10px;
+  width: 610px;
 }

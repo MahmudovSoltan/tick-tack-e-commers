@@ -31,11 +31,12 @@
   width: 314px;
   padding: 8px 12px;
   border-radius: 10px;
+  height: 40px;
   background-color: #f6f5fb;
 }
 .addres_title {
   font-weight: 700;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 100%;
   letter-spacing: 0%;
   color: #2b3043;
@@ -43,14 +44,17 @@
 }
 .addres_adress {
   font-weight: 300;
-  font-size: 14px;
+  font-size: 10px;
   line-height: 100%;
   color: #2b3043;
 }
 .search_input {
   width: 400px;
-  padding: 13px 25px;
+  /* padding: 10px 25px; */
+  padding-left: 10px;
+  align-content: center;
   border-radius: 10px;
+  height: 40px;
   background-color: #f6f5fb;
 }
 .search_input input {

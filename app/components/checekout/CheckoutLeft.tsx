@@ -1,14 +1,14 @@
 "use client"
-import { Dispatch, SetStateAction,useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 interface ChooseType {
     cash: boolean,
     card: boolean
 }
 interface PropsType {
-  setIsModal: Dispatch<SetStateAction<boolean>>;
+    setIsModal: Dispatch<SetStateAction<boolean>>;
 }
-const CheckoutLeft = ({setIsModal}:PropsType) => {
+const CheckoutLeft = ({ setIsModal }: PropsType) => {
     const [choose, setChoose] = useState<ChooseType>({
         cash: false,
         card: false
@@ -106,7 +106,7 @@ const CheckoutLeft = ({setIsModal}:PropsType) => {
                     </div>
                 </div>
                 <div className="flex items-center justify-center">
-                <button onClick={()=>setIsModal(true)} className="acsept_btn">Sifarişi tamamla</button>
+                    <button onClick={() => setIsModal(true)} className="acsept_btn">Sifarişi tamamla</button>
 
                 </div>
             </div>

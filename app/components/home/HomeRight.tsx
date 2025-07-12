@@ -54,9 +54,9 @@ const categories = [
 const HomeRight = () => {
     const dispatch = useAppDispatch();
     const { categories } = useAppSelector((state) => state.categories)
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(getAllCategory())
-    },[])
+    }, [])
     return (
         <div className="home_right_container">
             {

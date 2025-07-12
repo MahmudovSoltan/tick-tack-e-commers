@@ -1,5 +1,11 @@
+'use client'
 
-const BasketTotalAmount = () => {
+import { useRouter } from "next/navigation"
+
+const BasketTotalAmount = ({products}) => {
+    console.log(products);
+    
+    const navigate = useRouter()
     return (
         <div className="w-[40%] min-h-[427px]">
             <p className="basket_left_title mb-[10px]">
@@ -12,7 +18,7 @@ const BasketTotalAmount = () => {
                             Ümumi
                         </p>
                         <p>
-                            13,65 AZN
+                            {products?.total} AZN
                         </p>
                     </div>
                     <div>
@@ -32,10 +38,10 @@ const BasketTotalAmount = () => {
                             Yekun məbləğ
                         </p>
                         <p>
-                            13,65 AZN
+                            {products?.total} AZN
                         </p>
                     </div>
-                    <button className="order_btn">
+                    <button className="order_btn" onClick={()=>navigate.push("/checkout")}>
                         Sifarişi tamamla
                     </button>
                 </div>
