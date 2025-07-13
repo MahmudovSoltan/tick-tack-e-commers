@@ -1,4 +1,9 @@
-import { Dispatch, SetStateAction } from "react";
+'use client'
+
+import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
+import { getAllCheckout } from "@/app/store/slices/checkoutSlice";
+import { Dispatch, SetStateAction, useEffect } from "react";
+import LoadingSpinner from "../lodanig/LoadingSpinner";
 
 const orders = [
     {
@@ -46,6 +51,15 @@ interface PropsType {
     setOrderDetail: Dispatch<SetStateAction<boolean>>
 }
 const AccountOrderList = ({ setOrderDetail }: PropsType) => {
+    const dispatch = useAppDispatch()
+    const { chekoutProducts, loading } = useAppSelector((state) => state.chekcout)
+    useEffect(() => {
+        dispatch(getAllCheckout())
+    }, [])
+    console.log(chekoutProducts);
+    if (loading) {
+        return <LoadingSpinner />
+    }
     return (
         <div>
 
@@ -63,15 +77,15 @@ const AccountOrderList = ({ setOrderDetail }: PropsType) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {orders.map((order, index) => (
+                        {chekoutProducts.map((order, index) => (
                             <tr key={index}>
-                                <td>{order.no}</td>
-                                <td>{order.date}</td>
+                                <td>{index+1}</td>
+                                <td>{new Date(order?.createdAt).toLocaleDateString()}</td>
                                 <td>{order.address}</td>
-                                <td>{order.count}</td>
-                                <td>{order.subtotal}</td>
+                                <td>{order.items?.length}</td>
+                                <td>{order.total} m /pulsuz </td>
                                 <td>
-                                    <span className={`status ${order.status === "Tamamlandı" ? "done" : "cancelled"}`}>
+                                    <span>
                                         {order.status}
                                     </span>
                                 </td>

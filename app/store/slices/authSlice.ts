@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../utils/axiosInstance";
 import { ILoginFomtType } from "@/app/types/auth.type";
 import { toast } from "react-toastify";
+import { getCookie, removeCookie, setCookie } from "@/app/utils/cookie";
 
 interface AuthState {
   user: any;
@@ -13,8 +14,8 @@ interface AuthState {
 
 const initialState: AuthState = {
   user: null,
-  access_token: typeof window !== "undefined" ? localStorage.getItem("access_token") : null,
-  refresh_token: typeof window !== "undefined" ? localStorage.getItem("refresh_token") : null,
+  access_token: typeof window !== "undefined" ? getCookie("access_token") : null,
+  refresh_token: typeof window !== "undefined" ? getCookie("refresh_token") : null,
   loading: false,
   error: null,
 };
@@ -32,8 +33,10 @@ export const login = createAsyncThunk(
       const user = response.data.profile;
 
       toast.success("Daxil oldunuz ")
-      localStorage.setItem("access_token", access_token);
-      localStorage.setItem("refresh_token", refresh_token);
+
+
+      setCookie("access_token", access_token, 10)
+      setCookie("refresh_token", refresh_token, 10)
       return { user, access_token, refresh_token };
     } catch (error: any) {
       toast.error("Daxil ola bilmədiz ")
@@ -48,20 +51,8 @@ export const register = createAsyncThunk(
   "auth/register",
   async (data: ILoginFomtType, thunkAPI) => {
     try {
-      const response = await axiosInstance.post("/api/tiktak/auth/signup", data); // 👈 Bükmə yoxdur
-      const { tokens, profile } = response.data;
-
-      // Əgər backend token göndərirsə
-      if (tokens) {
-        localStorage.setItem("access_token", tokens.access_token);
-        localStorage.setItem("refresh_token", tokens.refresh_token);
-      }
+      await axiosInstance.post("/api/tiktak/auth/signup", data); // 👈 Bükmə yoxdur
       toast.success("Qeydiyyatdan keçdiz")
-      return {
-        user: profile,
-        access_token: tokens?.access_token ?? null,
-        refresh_token: tokens?.refresh_token ?? null,
-      };
     } catch (error: any) {
       toast.error("Qeydiyyatdan keçə bilmədiz ")
       return thunkAPI.rejectWithValue(
@@ -89,16 +80,16 @@ export const refreshTokenThunk = createAsyncThunk(
 
       const { access_token, refresh_token: new_refresh_token } = response.data.data.tokens;
 
-      localStorage.setItem("access_token", access_token);
-      localStorage.setItem("refresh_token", new_refresh_token);
+      setCookie("access_token", access_token, 1)
+      setCookie("refresh_token", new_refresh_token, 1)
 
       return {
         access_token,
         refresh_token: new_refresh_token,
       };
     } catch (error: any) {
-      localStorage.removeItem("access_token");
-      localStorage.removeItem("refresh_token");
+      removeCookie("access_token")
+      removeCookie("refresh_token")
       toast.error("Sessiyanız bitdi. Zəhmət olmasa yenidən daxil olun.");
       window.location.href = "/auth";
       return thunkAPI.rejectWithValue("Token refresh alınmadı");
@@ -115,8 +106,8 @@ const authSlice = createSlice({
       state.user = null;
       state.access_token = null;
       state.refresh_token = null
-      localStorage.removeItem("refresh_token");
-      localStorage.removeItem("access_token");
+      removeCookie("access_token")
+      removeCookie("refresh_token")
     },
   },
   extraReducers: (builder) => {

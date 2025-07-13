@@ -68,10 +68,11 @@
 }
 .home_right_card h4 {
   font-weight: 400;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 100%;
   letter-spacing: 0%;
   color: #000000;
+  text-align: center;
 }
 .home_right_image {
   height: 72px;

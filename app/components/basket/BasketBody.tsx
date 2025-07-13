@@ -9,7 +9,6 @@ import { getAllBasketProducts } from "@/app/store/slices/basketSlice"
 const BasketBody = () => {
     const { baskets } = useAppSelector((state) => state.baskets)
     const dispatch = useAppDispatch()
-    console.log(baskets.items);
     useEffect(() => {
         dispatch(getAllBasketProducts())
     }, [])

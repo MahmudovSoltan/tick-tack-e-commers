@@ -1,5 +1,6 @@
 import Image from "next/image"
 import '@/app/(main)/category/css/category.css'
+import { useRouter } from "next/navigation";
 interface ComponentSidebarPropsType {
     links: string[],
     image: string,
@@ -7,15 +8,15 @@ interface ComponentSidebarPropsType {
 
 }
 const ComponentSidebar = ({ links, image,currentCategory }: ComponentSidebarPropsType) => {
-    console.log(currentCategory);
-    
+    console.log(links,"links");
+    const navigate = useRouter()
     return (
         <aside className="w-[300px]">
             <div className="aside_top">
             <ul className="aside_links">
                 {
                     links?.map((link, index) => (
-                        <li key={index}  className={`${link.name === currentCategory && "categories_sub_title" }`}>
+                        <li key={index} onClick={()=>navigate.push(`/category/${link.id}`)}  className={`${link.name === currentCategory && "categories_sub_title" }`}>
                             {link?.name}
                         </li>
                     ))

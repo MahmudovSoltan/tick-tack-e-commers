@@ -1,25 +1,69 @@
 "use client"
-import { Dispatch, SetStateAction, useState } from "react";
+import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
+import { fetchProfile } from "@/app/store/slices/profileSlice";
+import { useEffect, useState } from "react";
+import LoadingSpinner from "../lodanig/LoadingSpinner";
 
 interface ChooseType {
     cash: boolean,
     card: boolean
 }
-interface PropsType {
-    setIsModal: Dispatch<SetStateAction<boolean>>;
-}
-const CheckoutLeft = ({ setIsModal }: PropsType) => {
+
+const CheckoutLeft = ({ openModal }) => {
+    const [error, setError] = useState<string>("")
+    const { user, loading } = useAppSelector((state) => state.user)
     const [choose, setChoose] = useState<ChooseType>({
         cash: false,
         card: false
     })
+    const [formData, setFormData] = useState({
+        paymentMethod: "" /* Enum CASH CARD */,
+        note: "",
+        address: "",
+        phone: ""
+    })
+    const dispatch = useAppDispatch()
 
-    const handleChoose = (type: 'cash' | 'card') => {
+    console.log(user?.address);
+
+
+    const handleChoose = (type: 'CASH' | 'CARD') => {
         setChoose({
-            cash: type === 'cash',
-            card: type === 'card'
+            cash: type === 'CASH',
+            card: type === 'CARD'
         });
+        setFormData({ ...formData, paymentMethod: type })
     };
+
+
+    useEffect(() => {
+        dispatch(fetchProfile())
+    }, [dispatch])
+
+    useEffect(() => {
+        if (user) {
+            setFormData((prev) => ({
+                ...prev,
+                address: user.address || "",
+                phone: user.phone || ""
+            }))
+        }
+    }, [user])
+    const submit = () => {
+        if (!formData.paymentMethod) {
+            setError("Zəhmət olmasa ödəniş metodunu seçin.");
+            return;
+        } else if(formData.paymentMethod){
+            setError("");
+            openModal(formData);
+            console.log(formData);
+
+        }
+    };
+    if (!user || loading) {
+        return <LoadingSpinner />
+    }
+
     return (
         <div className="checkout_left_container">
             <h3 className="checkout_title">
@@ -34,7 +78,7 @@ const CheckoutLeft = ({ setIsModal }: PropsType) => {
                                 Adınız
                             </h6>
                             <p className="left_text">
-                                Sarkhan Rahimli
+                                {user?.full_name}
                             </p>
                         </div>
                         <div>
@@ -42,7 +86,7 @@ const CheckoutLeft = ({ setIsModal }: PropsType) => {
                                 Ünvanınız
                             </h6>
                             <p className="left_text">
-                                Xatai rayon Sariyev kuc.45 Bakı
+                                {user?.address}
                             </p>
                         </div>
                         <div>
@@ -50,7 +94,7 @@ const CheckoutLeft = ({ setIsModal }: PropsType) => {
                                 Telefon nömrəniz
                             </h6>
                             <p className="left_text">
-                                +994 51 399 38 97
+                                {user?.phone}
                             </p>
                         </div>
                     </div>
@@ -59,7 +103,7 @@ const CheckoutLeft = ({ setIsModal }: PropsType) => {
                             Əlavə qeyd
                         </h6>
                         <div className="textarea">
-                            <textarea name="" id="" placeholder="Əlavə qeydiniz varsa buraya daxil edin" />
+                            <textarea onChange={(e) => setFormData({ ...formData, note: e.target.value })} name="" id="" placeholder="Əlavə qeydiniz varsa buraya daxil edin" />
                         </div>
                     </div>
                 </div>
@@ -67,8 +111,9 @@ const CheckoutLeft = ({ setIsModal }: PropsType) => {
                     <p className="left_title " >
                         Ödəmə metodu seçin:
                     </p>
+                        {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
                     <div className="flex items-center gap-8 mt-4">
-                        <div className={`w-1/2 order_choose  ${choose.cash && "active_choose"}`} onClick={() => handleChoose("cash")}>
+                        <div className={`w-1/2 order_choose  ${choose.cash && "active_choose"}`} onClick={() => handleChoose("CASH")}>
                             <div>
                                 <svg width="40" height="40" viewBox="0 0 49 43" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M48.9313 23.8366C48.9312 23.8364 48.9312 23.8363 48.931 23.836L39.6796 0.606547C39.4833 0.11298 38.9238 -0.127972 38.4303 0.0683725C38.4299 0.0684928 38.4295 0.068613 38.4292 0.0688535L0.897438 15.0136C0.744378 15.0798 0.611638 15.1853 0.512684 15.3195C0.200553 15.4817 0.00336659 15.8027 0 16.1544V41.1634C0 41.6946 0.430683 42.1253 0.961884 42.1253H41.361C41.8922 42.1253 42.3229 41.6946 42.3229 41.1634V27.5047L48.3943 25.0865C48.8877 24.8897 49.1281 24.3301 48.9313 23.8366ZM40.3991 40.2015H1.92377V17.1163H40.3991V40.2015ZM16.049 15.1974L32.1548 8.77967C33.5922 10.2906 35.5839 11.1493 37.6693 11.1575L39.2756 15.1974H16.049ZM42.3229 25.4385V16.1544C42.3229 15.6232 41.8922 15.1926 41.361 15.1926H41.3456L39.3074 10.0734C39.2848 10.0307 39.2584 9.99008 39.2285 9.95221C39.1254 9.48894 38.6963 9.17284 38.2233 9.21156C36.283 9.38842 34.3848 8.57106 33.1802 7.03963C32.8804 6.66966 32.3536 6.57768 31.9461 6.82416C31.9004 6.82957 31.8551 6.83799 31.8105 6.84917L12.1476 14.6789C11.9097 14.7722 11.7194 14.9573 11.6196 15.1926H5.64818L38.2484 2.21193L46.7889 23.6571L42.3229 25.4385Z" fill="currentColor" />
@@ -85,7 +130,7 @@ const CheckoutLeft = ({ setIsModal }: PropsType) => {
                                 <span></span>
                             </div>
                         </div>
-                        <div className={`w-1/2 order_choose  ${choose.card && "active_choose"}`} onClick={() => handleChoose("card")}>
+                        <div className={`w-1/2 order_choose  ${choose.card && "active_choose"}`} onClick={() => handleChoose("CARD")}>
                             <div>
                                 <svg width="40" height="40" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M25.0584 30.9386H37.5878C38.0577 30.9386 38.3709 30.6254 38.3709 30.1556V23.1078C38.3709 22.6379 38.0577 22.3247 37.5878 22.3247H25.0584C24.5886 22.3247 24.2754 22.6379 24.2754 23.1078V30.1556C24.2753 30.6253 24.5886 30.9386 25.0584 30.9386ZM25.8415 23.8908H36.8048V29.3724H25.8415V23.8908Z" fill="currentColor" />
@@ -106,7 +151,7 @@ const CheckoutLeft = ({ setIsModal }: PropsType) => {
                     </div>
                 </div>
                 <div className="flex items-center justify-center">
-                    <button onClick={() => setIsModal(true)} className="acsept_btn">Sifarişi tamamla</button>
+                    <button onClick={submit} className="acsept_btn">Sifarişi tamamla</button>
 
                 </div>
             </div>
