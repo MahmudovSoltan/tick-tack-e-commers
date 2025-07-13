@@ -2,7 +2,7 @@
 
 import { useMyFormState } from "@/app/hooks/useForm";
 import { useAppDispatch } from "@/app/store/hooks";
-import { register } from "@/app/store/slices/authStore";
+import { register } from "@/app/store/slices/authSlice";
 import { ILoginFomtType } from "@/app/types/auth.type";
 // Adını düzgün yoxla
 

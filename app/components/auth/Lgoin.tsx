@@ -1,6 +1,6 @@
 import { useMyFormState } from "@/app/hooks/useForm";
 import { useAppDispatch } from "@/app/store/hooks";
-import { login } from "@/app/store/slices/authStore";
+import { login } from "@/app/store/slices/authSlice";
 import { ILoginFomtType } from "@/app/types/auth.type";
 import { useRouter } from "next/navigation";
 import React from "react";

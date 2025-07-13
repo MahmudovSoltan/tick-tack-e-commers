@@ -11,21 +11,29 @@ import 'swiper/css/navigation';
 import { Navigation, Autoplay } from 'swiper/modules';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 const SwiperCarusel = ({ data }) => {
     const filtered = data?.data?.filter((item) => item.img_url).slice(1, 5);
     const navigate = useRouter()
     const bg_url = "https://www.bigbasketco.com/wp-content/uploads/good-l-corp-what-americas-best-grocery-stores-have-in-common.jpg"
-    const user = localStorage.getItem("access_token")
+    const [user, setUser] = useState<string | null>(null);
+
+    useEffect(() => {
+        const token = localStorage.getItem("access_token");
+        setUser(token);
+    }, []);
     const handleNavigate = () => {
-        console.log(user);
         if (user) {
             navigate.push("/home")
-        }  else if (!user){
+        } else if (!user) {
             navigate.push("/auth")
         }
 
     }
+
+    console.log(user);
+    
     return (
         <section>
             <Swiper

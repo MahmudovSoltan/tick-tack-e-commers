@@ -71,6 +71,41 @@ export const register = createAsyncThunk(
   }
 );
 
+
+
+// ⬇️ login/register-dən sonra əlavə et
+
+// 🔁 Refresh Token funksiyası
+export const refreshTokenThunk = createAsyncThunk(
+  "auth/refreshToken",
+  async (_, thunkAPI) => {
+    try {
+      const refresh_token = localStorage.getItem("refresh_token");
+      if (!refresh_token) throw new Error("Refresh token yoxdur");
+
+      const response = await axiosInstance.post("/api/tiktak/auth/refresh", {
+        refresh_token,
+      });
+
+      const { access_token, refresh_token: new_refresh_token } = response.data.data.tokens;
+
+      localStorage.setItem("access_token", access_token);
+      localStorage.setItem("refresh_token", new_refresh_token);
+
+      return {
+        access_token,
+        refresh_token: new_refresh_token,
+      };
+    } catch (error: any) {
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("refresh_token");
+      toast.error("Sessiyanız bitdi. Zəhmət olmasa yenidən daxil olun.");
+      window.location.href = "/auth";
+      return thunkAPI.rejectWithValue("Token refresh alınmadı");
+    }
+  }
+);
+
 // 🔄 SLICE
 const authSlice = createSlice({
   name: "auth",
@@ -113,7 +148,19 @@ const authSlice = createSlice({
       .addCase(register.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
-      });
+      })
+
+      .addCase(refreshTokenThunk.fulfilled, (state, action) => {
+        state.access_token = action.payload.access_token;
+        state.refresh_token = action.payload.refresh_token;
+      })
+      .addCase(refreshTokenThunk.rejected, (state) => {
+        state.user = null;
+        state.access_token = null;
+        state.refresh_token = null;
+        state.loading = false;
+      })
+
   },
 });
 
