@@ -3,12 +3,16 @@ import campingReduser from './slices/campingSlice'
 import categoryReduser from './slices/categorySlice'
 import productReduser from './slices/productSlice'
 import basketReduser from './slices/basketSlice'
+import useReducer from './slices/profileSlice'
+import useCheckoutReduser from './slices/checkoutSlice'
 export const store = configureStore({
     reducer: {
         campings: campingReduser,
         categories: categoryReduser,
-        products:productReduser,
-        baskets:basketReduser
+        products: productReduser,
+        baskets: basketReduser,
+        user: useReducer,
+        chekcout:useCheckoutReduser
     },
 });
 

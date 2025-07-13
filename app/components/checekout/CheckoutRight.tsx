@@ -1,36 +1,49 @@
+'use client'
+
+import { useAppDispatch, useAppSelector } from "@/app/store/hooks"
+import { getAllBasketProducts } from "@/app/store/slices/basketSlice"
+import { useEffect } from "react"
 
 const CheckoutRight = () => {
+    const { baskets } = useAppSelector((state) => state.baskets)
+    const dispatch = useAppDispatch()
+    useEffect(() => {
+        dispatch(getAllBasketProducts())
+    }, [])
+    console.log(baskets);
+
     return (
         <div className="w-[40%]">
             <h3 className="checkout_title">
                 Xülasə
             </h3>
             <div className="checkout_right_content">
+
                 <div>
-                    <div className="user_product">
-                        <p>
-                            2 x Sumuklu et
-                        </p>
-                        <p>
-                            13,65 AZN
-                        </p>
-                    </div>
-                    <div className="user_product">
-                        <p>
-                            Pampers gece pants
-                        </p>
-                        <p>
-                            13,65 AZN
-                        </p>
-                    </div>
+                    {
+                        baskets?.items?.map((item) => (
+                            <div className="user_product" key={item.id}>
+                                <p>
+                                    {item?.product?.title}
+                                </p>
+                                <p>
+                                    {item?.product?.price} AZN
+                                </p>
+                            </div>
+
+                        ))
+                    }
+
                 </div>
+
+
                 <div className="checkout_right_bottom">
                     <div className="user_paid_info">
                         <p>
                             Ümumi:
                         </p>
                         <p>
-                            13,65 AZN
+                            {baskets?.total} AZN
                         </p>
                     </div>
                     <div className="user_paid_info">
@@ -46,7 +59,7 @@ const CheckoutRight = () => {
                             Yekun məbləğ
                         </p>
                         <p>
-                            13,65 AZN
+                            {baskets?.total} AZN
                         </p>
                     </div>
                 </div>

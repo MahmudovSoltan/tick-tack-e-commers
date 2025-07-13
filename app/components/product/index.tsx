@@ -5,6 +5,7 @@ import MyBasket from "@/app/ui/myBasket";
 import ProductInfo from "./ProductInfo";
 import EmptyBasket from "../basket/EmptyBasket";
 import EmptyProduct from "./EmptyProduct";
+import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 const categories = [
     "Tərəvəzlər",
     "Qış meyvələri",
@@ -18,6 +19,9 @@ const categories = [
 
 
 const ProductBody = () => {
+    const dispatch = useAppDispatch();
+    const { products } = useAppSelector((state) => state.products)
+    const { categories } = useAppSelector((state) => state.categories)
     return (
         <div>
             <div>
@@ -35,8 +39,8 @@ const ProductBody = () => {
                 </div>
                 <div className="categories_body_container">
                     <ComponentSidebar image={sideBarImage} links={categories} />
-                    {/* <ProductInfo /> */}
-                    <EmptyProduct />
+                    <ProductInfo />
+                    {/* <EmptyProduct /> */}
                     <div>
                         {/* <MyBasket /> */}
                         <EmptyBasket />

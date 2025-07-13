@@ -12,12 +12,14 @@ interface ProductState {
   products: Product[];
   loading: boolean;
   error: string | null;
+  product :any |null;
 }
 
 const initialState: ProductState = {
   products: [],
   loading: false,
   error: null,
+  product:null
 };
 
 // ✅ Async thunk – API-dən product-ları gətirir
@@ -32,7 +34,18 @@ export const fetchProducts = createAsyncThunk<Product[]>(
     }
   }
 );
-
+export const productDetailFunc = createAsyncThunk(
+  "productDetail/getProductDelati",
+  async (id) => {
+    try {
+      const response = await axiosInstance.get(`/api/tiktak/products/${id}`);
+      return response.data.data;
+    } catch (error: any) {
+      console.log(error);
+      
+    }
+  }
+)
 // ✅ Slice
 const productSlice = createSlice({
   name: 'products',
@@ -51,7 +64,11 @@ const productSlice = createSlice({
       .addCase(fetchProducts.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
-      });
+      })
+      .addCase(productDetailFunc.pending,(state, action) => {
+        state.loading = false;
+        state.product = action.payload;
+      })
   },
 });
 

@@ -1,0 +1,32 @@
+.wrapperStyle {
+  display: "flex";
+  align-items: "center";
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: "#f3f4f6";
+  position: absolute;
+  top: 0;
+  left: 0;
+ background-color: rgba(0, 0,0,0.5);
+}
+.boxStyle {
+  text-align: "center";
+  padding: "2rem";
+  border-radius: "12px";
+  box-shadow: "0 4px 12px rgba(0,0,0,0.1)";
+  background-color: "#ffffff";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: white;
+}
+
+.textStyle {
+  margin-top: "1rem";
+  font-size: "1rem";
+  color: "#2f675d";
+  font-weight: 500;
+  font-family: "sans-serif";
+}

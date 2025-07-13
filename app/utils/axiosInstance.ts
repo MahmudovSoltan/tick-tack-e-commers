@@ -1,7 +1,7 @@
 import axios from "axios";
-import { error } from "console";
 import { store } from "../store/store";
 import { refreshTokenThunk } from "../store/slices/authSlice";
+import { getCookie } from "./cookie";
 
 const axiosInstance = axios.create({
   baseURL: "https://api.sarkhanrahimli.dev", // <- öz API linkinlə əvəz et
@@ -13,7 +13,7 @@ const axiosInstance = axios.create({
 
 // 🔐 Token avtomatik əlavə etmək üçün interceptor (istəyə bağlı)
 axiosInstance.interceptors.request.use((config) => {
-  const access_token = localStorage.getItem("access_token");
+  const access_token = getCookie("access_token")
   if (access_token) {
     config.headers.Authorization = `Bearer ${access_token}`;
   }
