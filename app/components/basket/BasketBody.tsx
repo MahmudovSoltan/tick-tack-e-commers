@@ -12,6 +12,8 @@ const BasketBody = () => {
     useEffect(() => {
         dispatch(getAllBasketProducts())
     }, [])
+    console.log(baskets,'baskets');
+    
     return (
         <div className="basket_body_container">
             <BaksetLeft products={baskets?.items} />

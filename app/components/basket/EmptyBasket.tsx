@@ -3,7 +3,7 @@ import './css/emptyBasket.css'
 import emptyBasketImagre from '@/app/assets/images/sebet 1.svg'
 const EmptyBasket = () => {
     return (
-        <div className='empty_basket_container'>
+        <div className='empty_basket_container !w-[330px]'>
             <div>
                 <Image src={emptyBasketImagre} alt='basket-image' width={239} height={200} />
             </div>

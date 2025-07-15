@@ -12,12 +12,14 @@ import Image from "next/image";
 import { addBasketFunc, deleteProduct, getAllBasketProducts } from "@/app/store/slices/basketSlice";
 import { ToastContainer } from "react-toastify";
 import debounce from 'lodash/debounce';
+import EmptyBasket from "../basket/EmptyBasket";
+import LoadingSpinner from "../lodanig/LoadingSpinner";
 
 const CategoriesBody = ({ id }: string) => {
 
 
   const dispatch = useAppDispatch();
-  const { products } = useAppSelector((state) => state.products)
+  const { products, loading } = useAppSelector((state) => state.products)
   const { categories } = useAppSelector((state) => state.categories)
 
   const currentCategory = categories?.data?.find((category) => category.id == id)
@@ -44,7 +46,9 @@ const CategoriesBody = ({ id }: string) => {
     dispatch(getAllCategory())
     dispatch(fetchProducts())
   }, [id, addbasket])
-
+  if (loading) {
+    return <LoadingSpinner />
+  }
   return (
     <div>
       <div>
@@ -93,8 +97,10 @@ const CategoriesBody = ({ id }: string) => {
 
           </div>
           <div>
+            {
+              baskets?.items?.length > 0 ? <MyBasket baskets={baskets} deleteProduct={deleteProductFunc} addbasket={addbasket} /> : <EmptyBasket />
+            }
 
-            <MyBasket baskets={baskets} deleteProduct={deleteProductFunc} addbasket={addbasket} />
             <ToastContainer />
           </div>
         </div>

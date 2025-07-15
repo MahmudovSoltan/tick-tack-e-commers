@@ -2,7 +2,15 @@ import LinkComponent from '@/app/ui/links'
 import Header from '../../header'
 import '../css/product.css'
 import ProductBody from '@/app/components/product'
-const ProductDetail = () => {
+interface Props {
+  params: {
+    product_id: string
+  }
+}
+const ProductDetail = ({ params }: Props) => {
+    const {product_id} = params
+  
+      
     return (
         <div >
 
@@ -14,7 +22,7 @@ const ProductDetail = () => {
                 <section className="product_container">
                     <div className="container mx-auto">
                         <LinkComponent title="Meyvələr" />
-                        <ProductBody />
+                        <ProductBody id={product_id} />
                     </div>
                 </section>
 

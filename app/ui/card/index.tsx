@@ -4,6 +4,8 @@ import Image from 'next/image'
 import './css/customecard.css'
 import image1 from '@/app/assets/images/image 13.svg'
 import { useRouter } from 'next/navigation'
+import { useAppSelector } from '@/app/store/hooks'
+import LoadingSpinner from '@/app/components/lodanig/LoadingSpinner'
 
 interface CardPropsType {
     title: string,
@@ -13,14 +15,16 @@ interface CardPropsType {
     baskets: any[],
 }
 const Card = ({ title, image, onclik, price, id, baskets, deleteProductFunc }: CardPropsType) => {
-            const navigate = useRouter()
+    const navigate = useRouter()
     const isBasketProduct = baskets?.items?.find((basket) => basket?.product?.id === id);
+    const { loading } = useAppSelector((state) => state.baskets)
 
-
-
+    if (loading) {
+        return <LoadingSpinner />
+    }
     return (
         <div className='card_content'>
-            <div className='card_image' onClick={()=>navigate.push(`/product/${id}`)}>
+            <div className='card_image' onClick={() => navigate.push(`/product/${id}`)}>
                 {
                     image ? <Image src={image} alt={image + title} width={118} height={72} />
                         : <Image src={image1} alt={image1 + title} width={118} height={72} />

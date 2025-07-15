@@ -5,6 +5,11 @@ import AccountOrderList from "./AccountOrderList"
 
 const AccountOrder = () => {
   const [orderDetail, setOrderDetail] = useState<boolean>(false)
+  const [orderId,setOrderId]= useState(null)
+  const detailOrderFunc= (id)=>{
+    setOrderDetail(true)
+    setOrderId(id)
+  }
   return (
     <div className="tab_container">
       {
@@ -17,7 +22,7 @@ const AccountOrder = () => {
       <div>
 
         {
-          !orderDetail ? <AccountOrderList setOrderDetail={setOrderDetail} /> : <OrderDetails />
+          !orderDetail ? <AccountOrderList  detailOrderFunc={detailOrderFunc} /> : <OrderDetails orderId={orderId}/>
         }
 
 

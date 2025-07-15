@@ -6,6 +6,11 @@ import ProductInfo from "./ProductInfo";
 import EmptyBasket from "../basket/EmptyBasket";
 import EmptyProduct from "./EmptyProduct";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
+import { useEffect, useMemo } from "react";
+import { getAllCategory } from "@/app/store/slices/categorySlice";
+import { fetchProducts, productDetailFunc } from "@/app/store/slices/productSlice";
+import { addBasketFunc, deleteProduct, getAllBasketProducts } from "@/app/store/slices/basketSlice";
+import { debounce } from "lodash";
 const categories = [
     "Tərəvəzlər",
     "Qış meyvələri",
@@ -18,10 +23,43 @@ const categories = [
 
 
 
-const ProductBody = () => {
+const ProductBody = ({ id }: string) => {
     const dispatch = useAppDispatch();
-    const { products } = useAppSelector((state) => state.products)
+    const { product ,products} = useAppSelector((state) => state.products)
     const { categories } = useAppSelector((state) => state.categories)
+    const { baskets } = useAppSelector((state) => state.baskets)
+
+    const filterProduct = products.find((product) => product.id == product.id)
+    const isBasketProduct = baskets?.items?.find((basket) => basket?.product?.id == id);
+console.log(baskets,"products");
+
+    useEffect(() => {
+        dispatch(getAllCategory())
+        dispatch(productDetailFunc(id))
+        dispatch(getAllBasketProducts())
+        dispatch(fetchProducts())
+    }, [dispatch])
+
+
+    const addbasket = useMemo(() => {
+        console.log("click");
+
+        return debounce(async (id: string) => {
+            await dispatch(addBasketFunc(id));
+            await dispatch(getAllBasketProducts());
+        }, 500);
+    }, [dispatch]);
+
+    const deleteProductFunc = useMemo(() => {
+        console.log("click");
+        return debounce(async (id: string) => {
+            await dispatch(deleteProduct(id));
+            await dispatch(getAllBasketProducts());
+        }, 500);
+    }, [dispatch]);
+
+    console.log(product, "product");
+
     return (
         <div>
             <div>
@@ -38,12 +76,15 @@ const ProductBody = () => {
 
                 </div>
                 <div className="categories_body_container">
-                    <ComponentSidebar image={sideBarImage} links={categories} />
-                    <ProductInfo />
-                    {/* <EmptyProduct /> */}
+                    <ComponentSidebar currentCategory={product?.category?.name} image={sideBarImage} links={categories?.data} />
+                    <ProductInfo isBasketProduct={isBasketProduct} product={filterProduct} addbasket={addbasket} deletebasket={deleteProductFunc} />
                     <div>
-                        {/* <MyBasket /> */}
-                        <EmptyBasket />
+
+                        {
+                            baskets?.items?.length > 0 ? <MyBasket baskets={baskets} addbasket={addbasket} deleteProduct={deleteProductFunc} /> : <EmptyBasket />
+                        }
+
+
                     </div>
                 </div>
             </div>

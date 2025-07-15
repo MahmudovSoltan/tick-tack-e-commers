@@ -60,7 +60,21 @@ const basketSlice = createSlice({
             .addCase(getAllBasketProducts.fulfilled, (state, action) => {
                 state.loading = false;
                 state.baskets = action.payload;
+            }) 
+
+            .addCase(addBasketFunc.pending, (state) => {
+                state.loading = true;
             })
+            .addCase(addBasketFunc.fulfilled, (state) => {
+                state.loading = false;
+            }) 
+            .addCase(deleteProduct.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(deleteProduct.fulfilled, (state) => {
+                state.loading = false;
+                }) 
+
 
     },
 });

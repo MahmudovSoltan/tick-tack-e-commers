@@ -10,7 +10,7 @@ const MyBasket = ({ baskets, deleteProduct, addbasket }) => {
 
     return (
         <div className="my_basket_container">
-            <div className="h-[200px] overflow-y-auto">
+            <div className="max-h-[200px] overflow-y-auto">
 
                 {baskets?.items?.map((item) => (
                     <div key={item.id} className="basket_top">
@@ -68,8 +68,6 @@ const MyBasket = ({ baskets, deleteProduct, addbasket }) => {
                 ))
                 }
             </div>
-
-
             <div className="basket_bottom">
                 <div className="basket_total_price">
                     <p>Ümumi:</p>
