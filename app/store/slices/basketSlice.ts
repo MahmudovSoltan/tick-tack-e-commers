@@ -44,6 +44,33 @@ export const deleteProduct = createAsyncThunk<
         }
     }
 );
+
+export const removeProduct = createAsyncThunk(
+    'removeBasket/removeProduct',
+    async (id, thunkAPI) => {
+        try {
+            await axiosInstance.delete(`/api/tiktak/basket/${id}/remove-all`);
+            toast.success("Mehsul silindi")
+        } catch (error: unknown) {
+            console.log(error);
+            toast.error("Mehsul silinmedi")
+            return thunkAPI.rejectWithValue("Silinmə zamanı xəta baş verdi");
+        }
+    }
+)
+export const clearebasket = createAsyncThunk(
+'cleareBasket/clearbasketFunc',
+    async (_, thunkAPI) => {
+        try {
+            await axiosInstance.delete(`/api/tiktak/basket/clear`);
+            toast.success("Mehsul silindi")
+        } catch (error: unknown) {
+            console.log(error);
+            toast.error("Mehsul silinmedi")
+            return thunkAPI.rejectWithValue("Silinmə zamanı xəta baş verdi");
+        }
+    }
+)
 const basketSlice = createSlice({
     name: "basket",
     initialState: {
@@ -60,20 +87,32 @@ const basketSlice = createSlice({
             .addCase(getAllBasketProducts.fulfilled, (state, action) => {
                 state.loading = false;
                 state.baskets = action.payload;
-            }) 
+            })
 
             .addCase(addBasketFunc.pending, (state) => {
                 state.loading = true;
             })
             .addCase(addBasketFunc.fulfilled, (state) => {
                 state.loading = false;
-            }) 
+            })
             .addCase(deleteProduct.pending, (state) => {
                 state.loading = true;
             })
             .addCase(deleteProduct.fulfilled, (state) => {
                 state.loading = false;
-                }) 
+            })
+            .addCase(removeProduct.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(removeProduct.fulfilled, (state) => {
+                state.loading = false;
+            })
+            .addCase(clearebasket.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(clearebasket.fulfilled, (state) => {
+                state.loading = false;
+            })
 
 
     },

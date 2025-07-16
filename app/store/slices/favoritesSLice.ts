@@ -18,7 +18,7 @@ export const addAndDeleteFavorites = createAsyncThunk(
     "tagle/tagleFavorites",
     async (id, thunkAPI) => {
         try {
-            const response = await axiosInstance.get(`/api/tiktak/products/${id}/favorite`);
+            const response = await axiosInstance.post(`/api/tiktak/products/${id}/favorite`);
      
             return response.data
         } catch (error: unknown) {

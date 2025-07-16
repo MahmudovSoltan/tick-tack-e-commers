@@ -4,20 +4,31 @@ import { useAppDispatch, useAppSelector } from "@/app/store/hooks"
 import BaksetLeft from "./BaksetLeft"
 import BasketTotalAmount from "./BasketTotalAmount"
 import { useEffect } from "react"
-import { getAllBasketProducts } from "@/app/store/slices/basketSlice"
+import { clearebasket, getAllBasketProducts } from "@/app/store/slices/basketSlice"
+import LoadingSpinner from "../lodanig/LoadingSpinner"
+import EmptyBasket from "./EmptyBasket"
 
 const BasketBody = () => {
-    const { baskets } = useAppSelector((state) => state.baskets)
+    const { baskets, loading } = useAppSelector((state) => state.baskets)
     const dispatch = useAppDispatch()
     useEffect(() => {
         dispatch(getAllBasketProducts())
     }, [])
-    console.log(baskets,'baskets');
-    
+    const clearebasketFunc = async () => {
+        await dispatch(clearebasket())
+        await dispatch(getAllBasketProducts())
+    }
+    if (loading) {
+        return <LoadingSpinner />
+    }
     return (
         <div className="basket_body_container">
-            <BaksetLeft products={baskets?.items} />
-            <BasketTotalAmount products={baskets} />
+
+            {
+                baskets.length > 0 ? <>  <BaksetLeft products={baskets?.items} clearebasketFunc={clearebasketFunc} />
+                    <BasketTotalAmount products={baskets} /></> :  <div className="flex items-center justify-center w-full mb-14 bg-white rounded-2xl"><EmptyBasket /></div> 
+            }
+
         </div>
     )
 }

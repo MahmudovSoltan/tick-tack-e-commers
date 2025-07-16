@@ -9,7 +9,7 @@ import { useEffect, useMemo } from "react";
 import { fetchProducts } from "@/app/store/slices/productSlice";
 import imgage from '@/app/assets/images/Group 42.svg'
 import Image from "next/image";
-import { addBasketFunc, deleteProduct, getAllBasketProducts } from "@/app/store/slices/basketSlice";
+import { addBasketFunc, deleteProduct, getAllBasketProducts, removeProduct } from "@/app/store/slices/basketSlice";
 import { ToastContainer } from "react-toastify";
 import debounce from 'lodash/debounce';
 import EmptyBasket from "../basket/EmptyBasket";
@@ -31,12 +31,22 @@ const CategoriesBody = ({ id }: string) => {
       await dispatch(getAllBasketProducts());
     }, 500);
   }, [dispatch]);
+
   const deleteProductFunc = useMemo(() => {
     return debounce(async (id: string) => {
       await dispatch(deleteProduct(id));
       await dispatch(getAllBasketProducts());
     }, 500);
   }, [dispatch]);
+
+  const removeProductFunc = useMemo(() => {
+    return debounce(async (id: string) => {
+      await dispatch(removeProduct(id));
+      await dispatch(getAllBasketProducts());
+    }, 500);
+  }, [dispatch]);
+
+
 
 
 
@@ -98,7 +108,7 @@ const CategoriesBody = ({ id }: string) => {
           </div>
           <div>
             {
-              baskets?.items?.length > 0 ? <MyBasket baskets={baskets} deleteProduct={deleteProductFunc} addbasket={addbasket} /> : <EmptyBasket />
+              baskets?.items?.length > 0 ? <MyBasket  removeProductFunc={removeProductFunc} baskets={baskets} deleteProduct={deleteProductFunc} addbasket={addbasket} /> : <EmptyBasket />
             }
 
             <ToastContainer />

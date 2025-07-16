@@ -20,7 +20,7 @@ const AccountInfo = () => {
     const initialFormData = useMemo(() => ({
         full_name: user?.full_name || "",
         address: user?.address || "",
-        password: "",
+        password:"",
         password_repeat: "",
         phone: user?.phone || ""
     }), [user])

@@ -1,5 +1,16 @@
+'use client'
+
+import { useAppDispatch, useAppSelector } from "@/app/store/hooks"
+import { fetchProfile } from "@/app/store/slices/profileSlice";
+import { useEffect } from "react";
 
 const Adress = () => {
+    const { user } = useAppSelector((state) => state.user)
+    const dispatch = useAppDispatch()
+    console.log(user);
+    useEffect(() => {
+        dispatch(fetchProfile())
+    }, [])
     return (
 
         <div className="adress_container" >
@@ -7,7 +18,10 @@ const Adress = () => {
                 Unvan
             </div>
             <p className="addres_adress">
-                55 Zarifa Aliyeva, Bakı, Azerbaij ...
+                {
+                    user?.address ? <span>{user?.address}</span> : "Ünvan daxil edilmeyib"
+                }
+
             </p>
         </div>
 

@@ -8,7 +8,7 @@ const FavoritesPage = () => {
                 <Header role="basket" />
 
             </div>
-            <section>
+            <section className="bg-[#f7f5fc] min-h-[570px] pt-8">
                 <div className="container mx-auto">
                     <FavoritesBody />
                 </div>
