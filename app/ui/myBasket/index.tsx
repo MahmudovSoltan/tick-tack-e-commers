@@ -4,13 +4,13 @@ import Image from "next/image"
 import image from '@/app/assets/images/image 13.svg'
 import './css/MyBasket.css'
 import { useRouter } from "next/navigation"
-const MyBasket = ({ baskets, deleteProduct, addbasket }) => {
+const MyBasket = ({ baskets, deleteProduct, addbasket ,removeProductFunc}) => {
     const navigate = useRouter()
 
 
     return (
         <div className="my_basket_container">
-            <div className="h-[200px] overflow-y-auto">
+            <div className="max-h-[200px] overflow-y-auto">
 
                 {baskets?.items?.map((item) => (
                     <div key={item.id} className="basket_top">
@@ -26,7 +26,7 @@ const MyBasket = ({ baskets, deleteProduct, addbasket }) => {
                                 <h6>
                                     {item?.product?.title}
                                 </h6>
-                                <svg onClick={() => deleteProduct(item.product.id)} width="10" height="10" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg onClick={() => removeProductFunc(item.product.id)} width="10" height="10" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g clipPath="url(#clip0_9_7928)">
                                         <path d="M10.8454 6.15918C10.6255 6.15918 10.4473 6.3374 10.4473 6.55731V14.0819C10.4473 14.3016 10.6255 14.48 10.8454 14.48C11.0653 14.48 11.2435 14.3016 11.2435 14.0819V6.55731C11.2435 6.3374 11.0653 6.15918 10.8454 6.15918Z" fill="currentColor" fillOpacity="0.21" />
                                         <path d="M6.14617 6.15918C5.92627 6.15918 5.74805 6.3374 5.74805 6.55731V14.0819C5.74805 14.3016 5.92627 14.48 6.14617 14.48C6.36608 14.48 6.5443 14.3016 6.5443 14.0819V6.55731C6.5443 6.3374 6.36608 6.15918 6.14617 6.15918Z" fill="currentColor" fillOpacity="0.21" />
@@ -68,8 +68,6 @@ const MyBasket = ({ baskets, deleteProduct, addbasket }) => {
                 ))
                 }
             </div>
-
-
             <div className="basket_bottom">
                 <div className="basket_total_price">
                     <p>Ümumi:</p>

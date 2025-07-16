@@ -4,24 +4,80 @@ import sideBarImage from '@/app/assets/images/image 13.svg'
 import MyBasket from "@/app/ui/myBasket";
 import ProductInfo from "./ProductInfo";
 import EmptyBasket from "../basket/EmptyBasket";
-import EmptyProduct from "./EmptyProduct";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
-const categories = [
-    "Tərəvəzlər",
-    "Qış meyvələri",
-    "Dietik Batonlar",
-    "Xlebçı",
-    "Diabetik Məhsullar",
-    "Dietik İçkilər",
-    "Qlütensiz Məhsullar",
-]
+import { useEffect, useMemo, useState } from "react";
+import { getAllCategory } from "@/app/store/slices/categorySlice";
+import { fetchProducts, productDetailFunc } from "@/app/store/slices/productSlice";
+import { addBasketFunc, deleteProduct, getAllBasketProducts, removeProduct } from "@/app/store/slices/basketSlice";
+import { debounce } from "lodash";
+import { addAndDeleteFavorites } from "@/app/store/slices/favoritesSLice";
+import LoadingSpinner from "../lodanig/LoadingSpinner";
 
 
 
-const ProductBody = () => {
+
+const ProductBody = ({ id }: string) => {
+    const [loading, setLoading] = useState(true)
     const dispatch = useAppDispatch();
-    const { products } = useAppSelector((state) => state.products)
+    const { product } = useAppSelector((state) => state.products)
     const { categories } = useAppSelector((state) => state.categories)
+    const { baskets } = useAppSelector((state) => state.baskets)
+
+    const isBasketProduct = baskets?.items?.find((basket) => basket?.product?.id == id);
+    console.log(baskets, "products");
+
+    useEffect(() => {
+        dispatch(getAllCategory())
+        dispatch(productDetailFunc(id))
+        dispatch(getAllBasketProducts())
+        dispatch(fetchProducts())
+         setTimeout(()=>{
+            setLoading(false)
+         },500)
+    }, [dispatch])
+
+
+    const addbasket = useMemo(() => {
+
+        return debounce(async (id: string) => {
+            setLoading(true)
+            await dispatch(addBasketFunc(id));
+            await dispatch(getAllBasketProducts());
+            setLoading(false)
+        }, 500);
+    }, [dispatch]);
+
+    const deleteProductFunc = useMemo(() => {
+        return debounce(async (id: string) => {
+            setLoading(true)
+            await dispatch(deleteProduct(id));
+            await dispatch(getAllBasketProducts());
+            setLoading(false)
+        }, 500);
+    }, [dispatch]);
+    const removeProductFunc = useMemo(() => {
+        return debounce(async (id: string) => {
+            setLoading(true)
+            await dispatch(removeProduct(id));
+            await dispatch(getAllBasketProducts());
+            setLoading(false)
+        }, 500);
+    }, [dispatch]);
+
+    const addFavoritesFUnc = useMemo(() => {
+        return debounce(async (id: string) => {
+            setLoading(true)
+            await dispatch(addAndDeleteFavorites(id));
+            await dispatch(getAllBasketProducts());
+            await dispatch(productDetailFunc(id))
+            setLoading(false)
+        }, 500);
+    }, [dispatch]);
+
+    if (loading) {
+        return <LoadingSpinner />
+    }
+
     return (
         <div>
             <div>
@@ -38,12 +94,21 @@ const ProductBody = () => {
 
                 </div>
                 <div className="categories_body_container">
-                    <ComponentSidebar image={sideBarImage} links={categories} />
-                    <ProductInfo />
-                    {/* <EmptyProduct /> */}
+                    <ComponentSidebar currentCategory={product?.category?.name} image={sideBarImage} links={categories?.data} />
+                    <ProductInfo
+                        isBasketProduct={isBasketProduct}
+                        product={product}
+                        addbasket={addbasket}
+                        deletebasket={deleteProductFunc}
+                        addFavoritesFUnc={addFavoritesFUnc}
+                    />
                     <div>
-                        {/* <MyBasket /> */}
-                        <EmptyBasket />
+
+                        {
+                            baskets?.items?.length > 0 ? <MyBasket removeProductFunc={removeProductFunc} baskets={baskets} addbasket={addbasket} deleteProduct={deleteProductFunc} /> : <EmptyBasket />
+                        }
+
+
                     </div>
                 </div>
             </div>

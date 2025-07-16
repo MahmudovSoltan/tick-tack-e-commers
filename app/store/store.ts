@@ -5,14 +5,16 @@ import productReduser from './slices/productSlice'
 import basketReduser from './slices/basketSlice'
 import useReducer from './slices/profileSlice'
 import useCheckoutReduser from './slices/checkoutSlice'
+import favoritesReduser from './slices/favoritesSLice'
 export const store = configureStore({
     reducer: {
         campings: campingReduser,
-        categories: categoryReduser,
+        categories: categoryReduser, 
         products: productReduser,
         baskets: basketReduser,
         user: useReducer,
-        chekcout:useCheckoutReduser
+        chekcout:useCheckoutReduser,
+        favosites:favoritesReduser
     },
 });
 

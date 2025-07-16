@@ -8,7 +8,6 @@ interface ComponentSidebarPropsType {
 
 }
 const ComponentSidebar = ({ links, image,currentCategory }: ComponentSidebarPropsType) => {
-    console.log(links,"links");
     const navigate = useRouter()
     return (
         <aside className="w-[300px]">

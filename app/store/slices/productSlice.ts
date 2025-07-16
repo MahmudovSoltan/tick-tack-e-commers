@@ -39,7 +39,8 @@ export const productDetailFunc = createAsyncThunk(
   async (id) => {
     try {
       const response = await axiosInstance.get(`/api/tiktak/products/${id}`);
-      return response.data.data;
+      return response.data.data
+;
     } catch (error: any) {
       console.log(error);
       
@@ -65,9 +66,12 @@ const productSlice = createSlice({
         state.loading = false;
         state.error = action.payload as string;
       })
-      .addCase(productDetailFunc.pending,(state, action) => {
+      .addCase(productDetailFunc.pending,(state) => {
         state.loading = false;
-        state.product = action.payload;
+      })
+      .addCase(productDetailFunc.fulfilled,(state,action) => {
+        state.loading = false;
+        state.product = action.payload
       })
   },
 });

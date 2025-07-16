@@ -81,6 +81,7 @@
   border-radius: 4px;
   color: #ffffff;
   font-size: 50px;
+  cursor: pointer;
 }
 .incriment_btn {
   background-color: #76cb4f;

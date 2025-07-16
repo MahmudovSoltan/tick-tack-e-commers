@@ -5,6 +5,7 @@ import HomeCategoryCard from "./HomeCategoryCard";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import { useEffect } from "react";
 import { getAllCategory } from "@/app/store/slices/categorySlice";
+import LoadingSpinner from "../lodanig/LoadingSpinner";
 
 
 
@@ -53,10 +54,11 @@ const categories = [
 
 const HomeRight = () => {
     const dispatch = useAppDispatch();
-    const { categories } = useAppSelector((state) => state.categories)
+    const { categories, loading } = useAppSelector((state) => state.categories)
     useEffect(() => {
         dispatch(getAllCategory())
     }, [])
+    if (loading) return <LoadingSpinner />
     return (
         <div className="home_right_container">
             {

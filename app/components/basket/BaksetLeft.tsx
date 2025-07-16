@@ -1,13 +1,14 @@
 import BasketProduct from "./BasketProduct"
 
-const BaksetLeft = ({products}) => {
+const BaksetLeft = ({products,clearebasketFunc}) => {
+
     return (
         <div className="basket_left_container">
             <div className="basket_let_top">
                 <p className="basket_left_title">
                     Səbətim
                 </p>
-                <p className="basket_p cursor-pointer">
+                <p onClick={clearebasketFunc} className="basket_p cursor-pointer">
                     Səbəti təmizlə
                 </p>
             </div>

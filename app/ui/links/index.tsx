@@ -1,4 +1,5 @@
-
+'use client'
+import { useRouter } from 'next/navigation'
 import './css/LinkComponent.css'
 
 interface linkProps {
@@ -6,11 +7,11 @@ interface linkProps {
 }
 
 const LinkComponent = ({ title }: linkProps) => {
-
+      const navigate = useRouter()
     return (
         <div>
             <div className='link_content'>
-                <span>Ana Səhifə </span> /{title}
+                <span className='cursor-pointer' onClick={()=>navigate.push("/home")}>Ana Səhifə </span> /{title}
             </div>
 
         </div>
