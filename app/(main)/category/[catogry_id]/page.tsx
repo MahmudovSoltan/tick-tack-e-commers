@@ -1,21 +1,10 @@
-
-
 import CategoriesBody from "@/app/components/categories/CategoriesBody";
 import Header from "../../header";
 import '../css/category.css'
 import LinkComponent from "@/app/ui/links";
-interface CategoryDetailPageProps {
-  params: {
-    catogry_id: string;
-  };
-}
 
-export default function CategoryDetailPage({ params }: CategoryDetailPageProps) {
+export default function CategoryDetailPage({ params }: { params: { catogry_id: string } }) {
   const { catogry_id } = params;
-
-
-  console.log(typeof(catogry_id));
-  
 
   return (
     <div>
@@ -28,8 +17,6 @@ export default function CategoryDetailPage({ params }: CategoryDetailPageProps) 
           <CategoriesBody id={catogry_id} />
         </div>
       </section>
-
     </div>
   );
 }
-
