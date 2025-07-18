@@ -28,12 +28,13 @@ const initialState: ProductState = {
 // ✅ Async thunk – API-dən product-ları gətirir
 export const fetchProducts = createAsyncThunk<Product[]>(
   'products/fetchProducts',
-  async (_, thunkAPI) => {
+  async () => {
     try {
       const response = await axiosInstance.get('/api/tiktak/products');
       return response.data.data;
-    } catch (error: any) {
-      return thunkAPI.rejectWithValue(error.message);
+    } catch (error: unknown) {
+      console.log(error);
+      
     }
   }
 );
@@ -44,7 +45,7 @@ export const productDetailFunc = createAsyncThunk(
       const response = await axiosInstance.get(`/api/tiktak/products/${id}`);
       return response.data.data
 ;
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.log(error);
       
     }

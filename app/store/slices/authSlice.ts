@@ -16,7 +16,7 @@ const initialState: AuthState = {
 // 🔐 LOGIN
 export const login = createAsyncThunk(
   "auth/login",
-  async (data: ILoginFomtType, thunkAPI) => {
+  async (data: ILoginFomtType) => {
     try {
       const response = await axiosInstance.post("/api/tiktak/auth/login", data);
 
@@ -31,9 +31,10 @@ export const login = createAsyncThunk(
       setCookie("access_token", access_token, 10)
       setCookie("refresh_token", refresh_token, 10)
       return { user, access_token, refresh_token };
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error("Daxil ola bilmədiz ")
-      return thunkAPI.rejectWithValue(error.response?.data?.message || "Giriş zamanı xəta baş verdi.");
+       console.log(error);
+       
     }
   }
 
@@ -42,16 +43,15 @@ export const login = createAsyncThunk(
 // 🔏 REGISTER
 export const register = createAsyncThunk(
   "auth/register",
-  async (data: ILoginFomtType, thunkAPI) => {
+  async (data: ILoginFomtType) => {
     try {
       await axiosInstance.post("/api/tiktak/auth/signup", data); // 👈 Bükmə yoxdur
       toast.success("Qeydiyyatdan keçdiz")
       setCookie("authTab", "0")
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error("Qeydiyyatdan keçə bilmədiz ")
-      return thunkAPI.rejectWithValue(
-        error.response?.data?.message || "Qeydiyyat zamanı xəta baş verdi."
-      );
+       console.log(error);
+       
     }
   }
 );
@@ -115,9 +115,9 @@ const authSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload.user;
-        state.access_token = action.payload.access_token;
-        state.refresh_token = action.payload.refresh_token;
+        state.user = action?.payload?.user;
+        state.access_token = action?.payload?.access_token;
+        state.refresh_token = action?.payload?.refresh_token;
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false;

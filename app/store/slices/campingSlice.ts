@@ -4,12 +4,14 @@ import { ICompingInitialType } from "@/app/types/camping.type";
 
 export const getAllCampaigns = createAsyncThunk(
   "campaigns/getAll",
-  async (_, thunkAPI) => {
+  async () => {
     try {
       const response = await axiosInstance.get("/api/tiktak/campaigns");
       return response.data;
-    } catch (error: any) {
-      return thunkAPI.rejectWithValue(error.response?.data || "Xəta baş verdi");
+    } catch (err: unknown) {
+
+      console.log(err);
+      
     }
   }
 );

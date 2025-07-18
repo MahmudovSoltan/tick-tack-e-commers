@@ -1,4 +1,3 @@
-import { log } from 'console'
 import { Dispatch, SetStateAction } from 'react'
 interface PropsType {
     setTab: Dispatch<SetStateAction<number>>,

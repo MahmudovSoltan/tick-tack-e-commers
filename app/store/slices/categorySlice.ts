@@ -4,12 +4,13 @@ import { ICategoryInitialType } from "@/app/types/category.type";
 
 export const getAllCategory = createAsyncThunk(
     "categorys/getAll",
-    async (_, thunkAPI) => {
+    async () => {
         try {
             const response = await axiosInstance.get("/api/tiktak/categories");
             return response.data.data;
-        } catch (error: any) {
-            return thunkAPI.rejectWithValue(error.response?.data || "Xəta baş verdi");
+        } catch (error: unknown) {
+            console.log(error);
+            
         }
     }
 );

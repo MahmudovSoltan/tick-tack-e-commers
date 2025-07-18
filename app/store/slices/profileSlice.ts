@@ -16,12 +16,13 @@ const initialState:InitialStateType = {
 // ✅ Async thunk – API-dən product-ları gətirir
 export const fetchProfile = createAsyncThunk(
     'profile/fetchProfile',
-    async (_, thunkAPI) => {
+    async () => {
         try {
             const response = await axiosInstance.get('/api/tiktak/profile');
             return response.data.data;
-        } catch (error: any) {
-            return thunkAPI.rejectWithValue(error.message);
+        } catch (error: unknown) {
+            console.log(error);
+            
         }
     }
 );
@@ -31,7 +32,7 @@ export const profileEdit = createAsyncThunk(
         try {
             const response = await axiosInstance.put(`/api/tiktak/profile`, data);
             return response.data.data;
-        } catch (error: any) {
+        } catch (error: unknown) {
             console.log(error);
 
         }
