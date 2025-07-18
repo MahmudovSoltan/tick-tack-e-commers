@@ -1,7 +1,14 @@
+import { IItems } from "@/app/types/basket.type"
 import BasketProduct from "./BasketProduct"
 
-const BaksetLeft = ({products,clearebasketFunc}) => {
+interface PropsType {
+  products?:IItems[],
+   clearebasketFunc:()=>void 
+}
 
+const BaksetLeft = ({products,clearebasketFunc}:PropsType) => {
+    console.log(products);
+    
     return (
         <div className="basket_left_container">
             <div className="basket_let_top">
@@ -12,7 +19,10 @@ const BaksetLeft = ({products,clearebasketFunc}) => {
                     Səbəti təmizlə
                 </p>
             </div>
-            <BasketProduct products={products} />
+            {
+                products &&  <BasketProduct products={products} />
+            }
+        
         </div>
     )
 }

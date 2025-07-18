@@ -7,7 +7,6 @@ import { useEffect } from "react";
 const Adress = () => {
     const { user } = useAppSelector((state) => state.user)
     const dispatch = useAppDispatch()
-    console.log(user);
     useEffect(() => {
         dispatch(fetchProfile())
     }, [])

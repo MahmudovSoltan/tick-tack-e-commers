@@ -1,10 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../utils/axiosInstance";
 import { toast } from "react-toastify";
+import { IBasketInitailStateType } from "@/app/types/basket.type";
 
 export const addBasketFunc = createAsyncThunk(
     "basket/addBasket",
-    async (id) => {
+    async (id:string) => {
         try {
             const response = await axiosInstance.post(`/api/tiktak/basket/${id}/add`);
             toast.success("Məhsul əlavə edildi")
@@ -47,7 +48,7 @@ export const deleteProduct = createAsyncThunk<
 
 export const removeProduct = createAsyncThunk(
     'removeBasket/removeProduct',
-    async (id, thunkAPI) => {
+    async (id:string, thunkAPI) => {
         try {
             await axiosInstance.delete(`/api/tiktak/basket/${id}/remove-all`);
             toast.success("Mehsul silindi")
@@ -71,13 +72,14 @@ export const clearebasket = createAsyncThunk(
         }
     }
 )
-const basketSlice = createSlice({
-    name: "basket",
-    initialState: {
-        baskets: [],
+const initialState:IBasketInitailStateType ={
+        baskets: null,
         loading: false,
 
-    },
+    }
+const basketSlice = createSlice({
+    name: "basket",
+    initialState :initialState ,
     reducers: {},
     extraReducers: (builder) => {
         builder

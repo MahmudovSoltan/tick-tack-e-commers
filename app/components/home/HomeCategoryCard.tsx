@@ -4,7 +4,7 @@ import Image from "next/image"
 import { useRouter } from "next/navigation";
 interface ICategory {
     title: string,
-    image: string,
+    image: string | undefined,
     id: number
 }
 const HomeCategoryCard = ({ title, image, id }: ICategory) => {

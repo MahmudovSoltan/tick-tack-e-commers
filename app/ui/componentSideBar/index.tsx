@@ -1,13 +1,20 @@
 import Image from "next/image"
 import '@/app/(main)/category/css/category.css'
 import { useRouter } from "next/navigation";
+
+ type Link ={
+   id:number ,
+   name:string
+ }
 interface ComponentSidebarPropsType {
-    links: string[],
+    links: Link[],
     image: string,
-    currentCategory:string[]
+    currentCategory:string | undefined
 
 }
 const ComponentSidebar = ({ links, image,currentCategory }: ComponentSidebarPropsType) => {
+    console.log(currentCategory);
+    
     const navigate = useRouter()
     return (
         <aside className="w-[300px]">

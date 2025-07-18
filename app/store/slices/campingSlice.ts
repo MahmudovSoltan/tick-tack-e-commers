@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../utils/axiosInstance";
+import { ICompingInitialType } from "@/app/types/camping.type";
 
 export const getAllCampaigns = createAsyncThunk(
   "campaigns/getAll",
@@ -12,14 +13,15 @@ export const getAllCampaigns = createAsyncThunk(
     }
   }
 );
-
+const initialState:ICompingInitialType =
+{
+  data: [],
+  loading: false,
+  error: null as string | null,
+}
 const campingSlice = createSlice({
   name: "campaigns",
-  initialState: {
-    data: [],
-    loading: false,
-    error: null as string | null,
-  },
+  initialState:initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder

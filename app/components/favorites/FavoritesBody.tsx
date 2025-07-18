@@ -70,8 +70,8 @@ const FavoritesBody = () => {
                 key={favorite.id}
                 baskets={baskets}
                 image={favorite.img_url}
-                onclik={() => addbasket(favorite.id)}
-                price={favorite.price}
+                onclik={() => addbasket(String(favorite.id))}
+                price={Number(favorite.price)}
                 title={favorite?.title}
                 id={favorite.id}
                 deleteProductFunc={deleteProductFunc}
@@ -83,7 +83,7 @@ const FavoritesBody = () => {
 
         <div>
           {
-            baskets?.items?.length > 0 ? <MyBasket removeProductFunc={removeProductFunc} baskets={baskets} addbasket={addbasket} deleteProduct={deleteProductFunc} /> : <EmptyBasket />
+             baskets && baskets?.items?.length > 0 ? <MyBasket removeProductFunc={removeProductFunc} baskets={baskets} addbasket={addbasket} deleteProduct={deleteProductFunc} /> : <EmptyBasket />
           }
 
         </div>

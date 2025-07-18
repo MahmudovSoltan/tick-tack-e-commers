@@ -1,10 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../utils/axiosInstance";
 import Swal from "sweetalert2";
+import { ICheckoutInital } from "@/app/types/checkoutSlice.type";
+import { IfomrType } from "@/app/components/checekout/CheckoutBody";
 
 export const addCheckoutFunc = createAsyncThunk(
     "checkout/addCheckout",
-    async (data) => {
+    async (data:IfomrType | null) => {
         try {
             const response = await axiosInstance.post(`/api/tiktak/orders/checkout`, data);
             Swal.fire({
@@ -42,7 +44,7 @@ export const detailCheckout = createAsyncThunk(
         try {
             const response = await axiosInstance.get(`/api/tiktak/orders/user/${id}`);
             console.log(response.data);
-            
+
             return response.data
         } catch (error: unknown) {
             console.log(error);
@@ -50,13 +52,14 @@ export const detailCheckout = createAsyncThunk(
         }
     }
 );
-const basketSlice = createSlice({
-    name: "basket",
-    initialState: {
-        chekoutProducts: [],
-        loading: false,
-        chekoutProduct: null,
-    },
+const initialState:ICheckoutInital = {
+    chekoutProducts: [],
+    loading: false,
+    chekoutProduct: null,
+}
+const checkoutSlice = createSlice({
+    name: "checkout",
+    initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder
@@ -73,10 +76,10 @@ const basketSlice = createSlice({
                 state.loading = false;
                 state.chekoutProduct = action.payload
             })
-            .addCase(getAllCheckout.pending,(state)=>{
+            .addCase(getAllCheckout.pending, (state) => {
                 state.loading = true
             })
-            .addCase(getAllCheckout.fulfilled,(state,action)=>{
+            .addCase(getAllCheckout.fulfilled, (state, action) => {
                 state.loading = false;
                 state.chekoutProducts = action.payload
             })
@@ -84,4 +87,4 @@ const basketSlice = createSlice({
     },
 });
 
-export default basketSlice.reducer;
+export default checkoutSlice.reducer;

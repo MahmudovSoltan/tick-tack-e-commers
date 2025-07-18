@@ -3,13 +3,16 @@ import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import { fetchProfile } from "@/app/store/slices/profileSlice";
 import { useEffect, useState } from "react";
 import LoadingSpinner from "../lodanig/LoadingSpinner";
+import { IfomrType } from "./CheckoutBody";
 
 interface ChooseType {
     cash: boolean,
     card: boolean
 }
-
-const CheckoutLeft = ({ openModal }) => {
+interface PropsType {
+    openModal:(form:IfomrType)=>void
+}
+const CheckoutLeft = ({ openModal }:PropsType) => {
     const [error, setError] = useState<string>("")
     const { user, loading } = useAppSelector((state) => state.user)
     const [choose, setChoose] = useState<ChooseType>({
@@ -24,7 +27,6 @@ const CheckoutLeft = ({ openModal }) => {
     })
     const dispatch = useAppDispatch()
 
-    console.log(user?.address);
 
 
     const handleChoose = (type: 'CASH' | 'CARD') => {

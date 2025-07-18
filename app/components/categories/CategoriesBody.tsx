@@ -14,16 +14,18 @@ import { ToastContainer } from "react-toastify";
 import debounce from 'lodash/debounce';
 import EmptyBasket from "../basket/EmptyBasket";
 import LoadingSpinner from "../lodanig/LoadingSpinner";
-
-const CategoriesBody = ({ id }: string) => {
+interface PropsType {
+  id:string
+}
+const CategoriesBody = ({ id }:PropsType) => {
 
 
   const dispatch = useAppDispatch();
   const { products, loading } = useAppSelector((state) => state.products)
   const { categories } = useAppSelector((state) => state.categories)
 
-  const currentCategory = categories?.data?.find((category) => category.id == id)
-  const filterProduct = products.filter((product) => product.category.id == id)
+  const currentCategory = categories?.find((category) => category.id === Number(id))
+  const filterProduct = products.filter((product) => product.category.id === Number(id))
   const { baskets } = useAppSelector((state) => state.baskets)
   const addbasket = useMemo(() => {
     return debounce(async (id: string) => {
@@ -75,14 +77,14 @@ const CategoriesBody = ({ id }: string) => {
 
         </div>
         <div className="categories_body_container">
-          <ComponentSidebar image={sideBarImage} links={categories?.data} currentCategory={currentCategory?.name} />
+          <ComponentSidebar image={sideBarImage} links={categories} currentCategory={currentCategory?.name} />
           <div className="category_cards">
             {
               filterProduct?.length > 0 ? filterProduct?.map((product, i) => (
                 <Card
                   key={i}
                   image={product?.img_url}
-                  onclik={() => addbasket(product.id)}
+                  onclik={() => addbasket(String(product.id))}
                   price={product.price}
                   title={product?.title}
                   id={product.id}
@@ -108,7 +110,7 @@ const CategoriesBody = ({ id }: string) => {
           </div>
           <div>
             {
-              baskets?.items?.length > 0 ? <MyBasket  removeProductFunc={removeProductFunc} baskets={baskets} deleteProduct={deleteProductFunc} addbasket={addbasket} /> : <EmptyBasket />
+                baskets && baskets?.items?.length > 0 ? <MyBasket  removeProductFunc={removeProductFunc} baskets={baskets} deleteProduct={deleteProductFunc} addbasket={addbasket} /> : <EmptyBasket />
             }
 
             <ToastContainer />

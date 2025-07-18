@@ -6,18 +6,22 @@ import image1 from '@/app/assets/images/image 13.svg'
 import { useRouter } from 'next/navigation'
 import { useAppSelector } from '@/app/store/hooks'
 import LoadingSpinner from '@/app/components/lodanig/LoadingSpinner'
+import { IBaskets } from '@/app/types/basket.type'
 
 interface CardPropsType {
     title: string,
-    image: string,
+    image: string | undefined | null,
     onclik: () => void,
     price: number,
-    baskets: any[],
+    baskets: IBaskets | null,
+    id: number,
+    deleteProductFunc: (id: string) => void
 }
 const Card = ({ title, image, onclik, price, id, baskets, deleteProductFunc }: CardPropsType) => {
     const navigate = useRouter()
     const isBasketProduct = baskets?.items?.find((basket) => basket?.product?.id === id);
     const { loading } = useAppSelector((state) => state.baskets)
+    console.log(baskets,"category baskets");
 
     if (loading) {
         return <LoadingSpinner />
@@ -38,7 +42,7 @@ const Card = ({ title, image, onclik, price, id, baskets, deleteProductFunc }: C
             {!isBasketProduct ? <div style={{ marginTop: "auto" }}>
                 <button onClick={onclik} className='add_basket_btn'>Səbətə əlavə et</button>
             </div> : <div className="basket_buttons mt-auto mb-1.5">
-                <button className="decriment_btn !w-[30px] !h-[25px] cursor-pointer" onClick={() => deleteProductFunc(id)}>
+                <button className="decriment_btn !w-[30px] !h-[25px] cursor-pointer" onClick={() => deleteProductFunc(String(id))}>
                     <svg width="15" height="3" viewBox="0 0 15 3" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="15" height="3" fill="white" />
                     </svg>

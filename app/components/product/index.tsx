@@ -16,15 +16,15 @@ import LoadingSpinner from "../lodanig/LoadingSpinner";
 
 
 
-const ProductBody = ({ id }: string) => {
+const ProductBody = ({ id }: {id:string}) => {
     const [loading, setLoading] = useState(true)
     const dispatch = useAppDispatch();
     const { product } = useAppSelector((state) => state.products)
     const { categories } = useAppSelector((state) => state.categories)
     const { baskets } = useAppSelector((state) => state.baskets)
 
-    const isBasketProduct = baskets?.items?.find((basket) => basket?.product?.id == id);
-    console.log(baskets, "products");
+    const isBasketProduct = baskets?.items?.find((basket) => basket?.product?.id === Number(id));
+    console.log(isBasketProduct, "isBasketProduct");
 
     useEffect(() => {
         dispatch(getAllCategory())
@@ -94,7 +94,7 @@ const ProductBody = ({ id }: string) => {
 
                 </div>
                 <div className="categories_body_container">
-                    <ComponentSidebar currentCategory={product?.category?.name} image={sideBarImage} links={categories?.data} />
+                    <ComponentSidebar currentCategory={product?.category?.name} image={sideBarImage} links={categories} />
                     <ProductInfo
                         isBasketProduct={isBasketProduct}
                         product={product}
@@ -105,7 +105,7 @@ const ProductBody = ({ id }: string) => {
                     <div>
 
                         {
-                            baskets?.items?.length > 0 ? <MyBasket removeProductFunc={removeProductFunc} baskets={baskets} addbasket={addbasket} deleteProduct={deleteProductFunc} /> : <EmptyBasket />
+                          baskets &&  baskets?.items?.length > 0 ? <MyBasket removeProductFunc={removeProductFunc} baskets={baskets} addbasket={addbasket} deleteProduct={deleteProductFunc} /> : <EmptyBasket />
                         }
 
 

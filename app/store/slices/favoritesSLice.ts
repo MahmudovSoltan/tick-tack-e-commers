@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../utils/axiosInstance";
+import { IFaroritesInitalType } from "@/app/types/favorites.type";
 
 
 export const getAllFavorites = createAsyncThunk(
@@ -16,7 +17,7 @@ export const getAllFavorites = createAsyncThunk(
 )
 export const addAndDeleteFavorites = createAsyncThunk(
     "tagle/tagleFavorites",
-    async (id, thunkAPI) => {
+    async (id:string, thunkAPI) => {
         try {
             const response = await axiosInstance.post(`/api/tiktak/products/${id}/favorite`);
      
@@ -30,13 +31,13 @@ export const addAndDeleteFavorites = createAsyncThunk(
 
 
 
-
-const favositestSlice = createSlice({
-    name: "favorites",
-    initialState: {
+const initialState:IFaroritesInitalType = {
         favosites: [],
         loading: false,
-    },
+    }
+const favositestSlice = createSlice({
+    name: "favorites",
+    initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder

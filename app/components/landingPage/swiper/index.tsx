@@ -9,11 +9,16 @@ import 'swiper/css/navigation';
 
 // import required modules
 import { Navigation, Autoplay } from 'swiper/modules';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { IDataType } from '@/app/types/camping.type';
 
-const SwiperCarusel = ({ data }) => {
+
+
+interface PropsType {
+    data? : {data:IDataType[]}
+}
+const SwiperCarusel = ({ data }:PropsType) => {
     const filtered = data?.data?.filter((item) => item.img_url).slice(1, 5);
     const navigate = useRouter()
     const bg_url = "https://www.bigbasketco.com/wp-content/uploads/good-l-corp-what-americas-best-grocery-stores-have-in-common.jpg"
@@ -32,7 +37,7 @@ const SwiperCarusel = ({ data }) => {
 
     }
 
-    console.log(user);
+    console.log(data);
     
     return (
         <section>

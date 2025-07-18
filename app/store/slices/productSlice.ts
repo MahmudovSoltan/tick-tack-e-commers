@@ -1,18 +1,21 @@
+import { ICategories } from '@/app/types/category.type';
+import { IProduct } from '@/app/types/product.type';
 import axiosInstance from '@/app/utils/axiosInstance';
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 
 export interface Product {
   id: number;
-  name: string;
+  title: string;
   price: number;
-  image?: string;
+  img_url?: string;
+  category:ICategories
 }
 
 interface ProductState {
   products: Product[];
   loading: boolean;
   error: string | null;
-  product :any |null;
+  product :IProduct |null;
 }
 
 const initialState: ProductState = {
@@ -36,7 +39,7 @@ export const fetchProducts = createAsyncThunk<Product[]>(
 );
 export const productDetailFunc = createAsyncThunk(
   "productDetail/getProductDelati",
-  async (id) => {
+  async (id:string) => {
     try {
       const response = await axiosInstance.get(`/api/tiktak/products/${id}`);
       return response.data.data

@@ -14,6 +14,9 @@ export default function CategoryDetailPage({ params }: CategoryDetailPageProps) 
   const { catogry_id } = params;
 
 
+  console.log(typeof(catogry_id));
+  
+
   return (
     <div>
       <div className="container mx-auto">

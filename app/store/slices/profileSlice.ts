@@ -1,9 +1,13 @@
+import { UserType } from '@/app/types/auth.type';
 import axiosInstance from '@/app/utils/axiosInstance';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
+interface InitialStateType {
+    loading:boolean,
+    user:UserType | null
+}
 
-
-const initialState = {
+const initialState:InitialStateType = {
     user: null,
     loading: false,
 
@@ -23,7 +27,7 @@ export const fetchProfile = createAsyncThunk(
 );
 export const profileEdit = createAsyncThunk(
     "profileEdit/getProfileEdit",
-    async (data) => {
+    async (data:UserType) => {
         try {
             const response = await axiosInstance.put(`/api/tiktak/profile`, data);
             return response.data.data;

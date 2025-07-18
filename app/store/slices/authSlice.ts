@@ -1,16 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../utils/axiosInstance";
-import { ILoginFomtType } from "@/app/types/auth.type";
+import { AuthState, ILoginFomtType } from "@/app/types/auth.type";
 import { toast } from "react-toastify";
 import { getCookie, removeCookie, setCookie } from "@/app/utils/cookie";
 
-interface AuthState {
-  user: any;
-  refresh_token: string | null;
-  access_token: string | null;
-  loading: boolean;
-  error: string | null;
-}
 
 const initialState: AuthState = {
   user: null,
@@ -53,6 +46,7 @@ export const register = createAsyncThunk(
     try {
       await axiosInstance.post("/api/tiktak/auth/signup", data); // 👈 Bükmə yoxdur
       toast.success("Qeydiyyatdan keçdiz")
+      setCookie("authTab", "0")
     } catch (error: any) {
       toast.error("Qeydiyyatdan keçə bilmədiz ")
       return thunkAPI.rejectWithValue(
@@ -87,7 +81,9 @@ export const refreshTokenThunk = createAsyncThunk(
         access_token,
         refresh_token: new_refresh_token,
       };
-    } catch (error: any) {
+    } catch (error: unknown) {
+      console.log(error);
+      
       removeCookie("access_token")
       removeCookie("refresh_token")
       toast.error("Sessiyanız bitdi. Zəhmət olmasa yenidən daxil olun.");

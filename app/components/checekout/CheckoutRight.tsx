@@ -10,7 +10,6 @@ const CheckoutRight = () => {
     useEffect(() => {
         dispatch(getAllBasketProducts())
     }, [])
-    console.log(baskets);
 
     return (
         <div className="w-[40%]">
