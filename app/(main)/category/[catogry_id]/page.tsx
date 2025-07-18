@@ -1,9 +1,18 @@
+// app/(main)/category/[catogry_id]/page.tsx
+
 import CategoriesBody from "@/app/components/categories/CategoriesBody";
 import Header from "../../header";
-import '../css/category.css'
+import "../css/category.css";
 import LinkComponent from "@/app/ui/links";
 
-export default function CategoryDetailPage({ params }: { params: { catogry_id: string } }) {
+// düzgün type
+type CategoryDetailPageProps = {
+  params: {
+    catogry_id: string;
+  };
+};
+
+export default function CategoryDetailPage({ params }: CategoryDetailPageProps) {
   const { catogry_id } = params;
 
   return (
@@ -19,4 +28,14 @@ export default function CategoryDetailPage({ params }: { params: { catogry_id: s
       </section>
     </div>
   );
+}
+
+// generateStaticParams funksiyası - build üçün lazımdır
+export async function generateStaticParams() {
+  const res = await fetch("https://api.example.com/categories"); // əgər real API-dirsə
+  const data = await res.json();
+
+  return data.map((cat: any) => ({
+    catogry_id: cat.id.toString(), // mütləq string!
+  }));
 }

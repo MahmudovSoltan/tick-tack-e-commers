@@ -57,7 +57,7 @@ const CategoriesBody = ({ id }:PropsType) => {
     dispatch(getAllBasketProducts())
     dispatch(getAllCategory())
     dispatch(fetchProducts())
-  }, [id, addbasket])
+  }, [id])
   if (loading) {
     return <LoadingSpinner />
   }
