@@ -2,6 +2,7 @@ import LinkComponent from '@/app/ui/links';
 import Header from '../../header';
 import '../css/product.css';
 import ProductBody from '@/app/components/product';
+import { JSX } from 'react';
 
 interface PageProps {
   params: {
@@ -9,7 +10,7 @@ interface PageProps {
   };
 }
 
-export default async function ProductDetail({ params }: PageProps) {
+export default async function ProductDetail({ params }: PageProps): Promise<JSX.Element> {
   const { product_id } = params
 
   return (
