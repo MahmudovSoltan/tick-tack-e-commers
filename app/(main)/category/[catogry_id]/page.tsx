@@ -1,3 +1,5 @@
+
+export const dynamic = "force-dynamic";
 import CategoriesBody from "@/app/components/categories/CategoriesBody";
 import Header from "../../header";
 import '../css/category.css'
