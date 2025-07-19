@@ -1,16 +1,16 @@
-import LinkComponent from '@/app/ui/links'
-import Header from '../../header'
-import '../css/product.css'
-import ProductBody from '@/app/components/product'
+import LinkComponent from '@/app/ui/links';
+import Header from '../../header';
+import '../css/product.css';
+import ProductBody from '@/app/components/product';
 
-interface Props {
+interface PageProps {
   params: {
-    product_id: string
-  }
+    product_id: string;
+  };
 }
 
-const ProductDetail = async ({ params }: { params: Props['params'] }) => {
-  const { product_id } = await params
+export default async function ProductDetail({ params }: PageProps) {
+  const { product_id } = params;
 
   return (
     <div>
@@ -24,7 +24,5 @@ const ProductDetail = async ({ params }: { params: Props['params'] }) => {
         </div>
       </section>
     </div>
-  )
+  );
 }
-
-export default ProductDetail
