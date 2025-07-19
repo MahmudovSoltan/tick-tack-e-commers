@@ -8,15 +8,15 @@ import LinkComponent from "@/app/ui/links";
 
 interface Props {
   params: {
-    catogry_id: string;
+    category_id: string;
   };
 }
 
 // !!! Burada `async` olmasa belə, `FC` istifadə ETMƏ!
 export default function CategoryDetailPage({ params }: Props) {
-  const { catogry_id } = params;
+  const { category_id } = params;
 
-  if (!catogry_id) {
+  if (!category_id) {
     return <div>Category not found</div>;
   }
 
@@ -28,7 +28,7 @@ export default function CategoryDetailPage({ params }: Props) {
       <section className="categories_container">
         <div className="container mx-auto">
           <LinkComponent title="Meyvələr" />
-          <CategoriesBody id={catogry_id} />
+          <CategoriesBody id={category_id} />
         </div>
       </section>
     </div>
