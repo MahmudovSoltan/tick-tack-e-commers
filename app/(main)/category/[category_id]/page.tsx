@@ -1,20 +1,17 @@
-
 export const dynamic = "force-dynamic";
 import CategoriesBody from "@/app/components/categories/CategoriesBody";
 import Header from "../../header";
 import '../css/category.css'
 import LinkComponent from "@/app/ui/links";
-// app/(main)/category/[catogry_id]/page.tsx
 
-
-interface Props {
+interface PageProps {
   params: {
-    category_id: string
-  }
-  searchParams?: { [key: string]: string | string[] | undefined }
+    category_id: string;
+  };
+  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
-export default function CategoryDetailPage({ params }: Props) {
+export default function CategoryDetailPage({ params }: PageProps) {
   const { category_id } = params;
 
   if (!category_id) {
