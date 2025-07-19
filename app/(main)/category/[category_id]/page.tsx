@@ -11,8 +11,8 @@ interface PageProps {
   searchParams?: { [key: string]: string | string[] | undefined };
 }
 
-export default function CategoryDetailPage({ params }: PageProps) {
-  const { category_id } = params;
+export default  async function CategoryDetailPage({ params }: PageProps) {
+  const { category_id } =  await params;
 
   if (!category_id) {
     return <div>Category not found</div>;
