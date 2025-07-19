@@ -10,7 +10,7 @@ interface PageProps {
 }
 
 export default async function ProductDetail({ params }: PageProps) {
-  const { product_id } = params;
+  const { product_id } = params
 
   return (
     <div>
