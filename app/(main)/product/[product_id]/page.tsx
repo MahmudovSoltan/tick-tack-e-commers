@@ -3,14 +3,14 @@ import Header from '../../header'
 import '../css/product.css'
 import ProductBody from '@/app/components/product'
 
-// interface Props {
-//   params: {
-//     product_id: string
-//   }
-// }
+interface Props {
+  params: {
+    product_id: string
+  }
+}
 
-const ProductDetail = async ({ params }: any) => {
-  const { product_id } = params
+const ProductDetail = async ({ params }: { params: Props['params'] }) => {
+  const { product_id } = await params
 
   return (
     <div>
