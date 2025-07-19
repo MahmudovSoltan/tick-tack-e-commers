@@ -6,13 +6,14 @@ import '../css/category.css'
 import LinkComponent from "@/app/ui/links";
 // app/(main)/category/[catogry_id]/page.tsx
 
+
 interface Props {
   params: {
-    category_id: string;
-  };
+    category_id: string
+  }
+  searchParams?: { [key: string]: string | string[] | undefined }
 }
 
-// !!! Burada `async` olmasa belə, `FC` istifadə ETMƏ!
 export default function CategoryDetailPage({ params }: Props) {
   const { category_id } = params;
 
