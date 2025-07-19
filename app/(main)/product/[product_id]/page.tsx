@@ -1,8 +1,9 @@
+// app/(main)/product/[product_id]/page.tsx
+
 import LinkComponent from '@/app/ui/links';
 import Header from '../../header';
 import '../css/product.css';
 import ProductBody from '@/app/components/product';
-import { JSX } from 'react';
 
 interface PageProps {
   params: {
@@ -10,8 +11,8 @@ interface PageProps {
   };
 }
 
-export default async function ProductDetail({ params }: PageProps): Promise<JSX.Element> {
-  const { product_id } = params
+export default async function Page({ params }: PageProps) {
+  const { product_id } = params;
 
   return (
     <div>
