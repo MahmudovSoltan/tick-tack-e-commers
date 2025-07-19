@@ -2,17 +2,22 @@ import CategoriesBody from "@/app/components/categories/CategoriesBody";
 import Header from "../../header";
 import '../css/category.css'
 import LinkComponent from "@/app/ui/links";
-import { FC } from "react";
-interface CategoryDetailPageProps {
+// app/(main)/category/[catogry_id]/page.tsx
+
+interface Props {
   params: {
     catogry_id: string;
   };
 }
-const CategoryDetailPage: FC<CategoryDetailPageProps> = ({ params }) => {
+
+// !!! Burada `async` olmasa belə, `FC` istifadə ETMƏ!
+export default function CategoryDetailPage({ params }: Props) {
   const { catogry_id } = params;
+
   if (!catogry_id) {
     return <div>Category not found</div>;
   }
+
   return (
     <div>
       <div className="container mx-auto">
@@ -27,5 +32,3 @@ const CategoryDetailPage: FC<CategoryDetailPageProps> = ({ params }) => {
     </div>
   );
 }
-
-export default CategoryDetailPage;
