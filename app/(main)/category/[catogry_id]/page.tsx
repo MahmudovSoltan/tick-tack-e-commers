@@ -3,8 +3,8 @@ import Header from "../../header";
 import '../css/category.css'
 import LinkComponent from "@/app/ui/links";
 
-export default function CategoryDetailPage({ params }: { params: { catogry_id: Promise<string> } }) {
-  const { catogry_id } = params;
+export default  async function   CategoryDetailPage({ params }: { params: { catogry_id: Promise<string> } }) {
+  const { catogry_id } = await params;
 
   return (
     <div>
