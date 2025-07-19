@@ -3,9 +3,11 @@ import Header from "../../header";
 import '../css/category.css'
 import LinkComponent from "@/app/ui/links";
 
-export default  async function   CategoryDetailPage({ params }: { params: { catogry_id: Promise<string> } }) {
-  const { catogry_id } = await params;
-
+export default function CategoryDetailPage({ params }: { params: { catogry_id: string } }) {
+  const { catogry_id } = params;
+  if (!catogry_id) {
+    return <div>Category not found</div>;
+  }
   return (
     <div>
       <div className="container mx-auto">
