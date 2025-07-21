@@ -1,6 +1,5 @@
 // app/(main)/category/[category_id]/page.tsx
 
-export const dynamic = "force-dynamic"; // SSR və ya ISR dəstəyi üçün əlavə olunur
 
 import CategoriesBody from "@/app/components/categories/CategoriesBody";
 import Header from "../../header";
