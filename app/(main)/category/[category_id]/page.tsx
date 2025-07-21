@@ -1,20 +1,20 @@
-'use client'
-
+// ❌ 'use client' sil, çünki bu server komponent olacaq
 export const dynamic = "force-dynamic";
+
 import CategoriesBody from "@/app/components/categories/CategoriesBody";
 import Header from "../../header";
 import '../css/category.css'
 import LinkComponent from "@/app/ui/links";
-import { useParams } from "next/navigation";
 
+// Bu interface serverdəki parametrləri əks etdirir
+interface PageProps {
+  params: {
+    category_id: string;
+  };
+}
 
-
-export default  function CategoryDetailPage() {
-   const params = useParams();
-
-  if (!params.category_id) {
-    return <div>Category not found</div>;
-  }
+export default function CategoryDetailPage({ params }: PageProps) {
+  const categoryId = Array.isArray(params.category_id) ? params.category_id[0] : params.category_id;
 
   return (
     <div>
@@ -24,7 +24,7 @@ export default  function CategoryDetailPage() {
       <section className="categories_container">
         <div className="container mx-auto">
           <LinkComponent title="Meyvələr" />
-          <CategoriesBody id={Array.isArray(params.category_id) ? params.category_id[0] : params.category_id} />
+          <CategoriesBody id={categoryId} />
         </div>
       </section>
     </div>
