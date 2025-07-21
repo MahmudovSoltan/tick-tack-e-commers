@@ -10,7 +10,6 @@ import { useParams } from "next/navigation";
   function CategoryDetailPage() {
 const params = useParams()
 
-console.log(params, "params in category detail page");
 
   return (
     <div>
