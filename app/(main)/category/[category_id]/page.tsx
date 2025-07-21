@@ -1,19 +1,16 @@
-// app/(main)/category/[category_id]/page.tsx
-
-
 import CategoriesBody from "@/app/components/categories/CategoriesBody";
 import Header from "../../header";
-import '../css/category.css';
+import "../css/category.css";
 import LinkComponent from "@/app/ui/links";
 
-interface PageProps {
+// ✅ Next.js page üçün tip belə olmalıdır:
+interface CategoryDetailPageProps {
   params: {
     category_id: string;
   };
 }
 
-// 🔧 Bura diqqət: async əlavə olunub
-export default async function CategoryDetailPage({ params }: PageProps) {
+export default async function CategoryDetailPage({ params }: CategoryDetailPageProps) {
   const categoryId = Array.isArray(params.category_id)
     ? params.category_id[0]
     : params.category_id;
@@ -32,7 +29,3 @@ export default async function CategoryDetailPage({ params }: PageProps) {
     </div>
   );
 }
-
-
-
-
