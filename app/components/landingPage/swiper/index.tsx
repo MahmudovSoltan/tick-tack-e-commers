@@ -16,10 +16,10 @@ import { IDataType } from '@/app/types/camping.type';
 
 
 interface PropsType {
-    data? : {data:IDataType[]}
+    data? : IDataType[]
 }
 const SwiperCarusel = ({ data }:PropsType) => {
-    const filtered = data?.data?.filter((item) => item.img_url).slice(1, 5);
+    const filtered = data?.filter((item) => item.img_url).slice(1, 5);
     const navigate = useRouter()
     const bg_url = "https://www.bigbasketco.com/wp-content/uploads/good-l-corp-what-americas-best-grocery-stores-have-in-common.jpg"
     const [user, setUser] = useState<string | null>(null);
