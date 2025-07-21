@@ -16,11 +16,9 @@ import { IDataType } from '@/app/types/camping.type';
 
 
 interface PropsType {
-  data?: {
-    data: IDataType[];
-  };
+  data?: IDataType | null;
 }
-const SwiperCarusel = ({ data }:PropsType) => {
+const SwiperCarusel = ({ data }: PropsType) => {
 
     console.log(data, "data in swiper");
 

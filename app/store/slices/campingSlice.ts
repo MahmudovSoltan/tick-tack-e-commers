@@ -17,7 +17,7 @@ export const getAllCampaigns = createAsyncThunk(
 );
 const initialState:ICompingInitialType =
 {
-  data: [],
+  data: null ,
   loading: false,
   error: null as string | null,
 }
