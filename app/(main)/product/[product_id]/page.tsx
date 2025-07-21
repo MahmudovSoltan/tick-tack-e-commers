@@ -1,19 +1,15 @@
-
+"use client"
 
 import LinkComponent from '@/app/ui/links';
 import Header from '../../header';
 import '../css/product.css';
 import ProductBody from '@/app/components/product';
+import { useParams } from 'next/navigation';
 
-interface IPageProps {
-  params: {
-    product_id: string;
-  };
-}
 
-export default async function Page({ params }: IPageProps) {
-  const { product_id } = params;
-
+export default  function Page() {
+const params = useParams()
+const product_id = Array.isArray(params.product_id) ? params.product_id[0] : params.product_id;
   return (
     <div>
       <div className="container mx-auto">
