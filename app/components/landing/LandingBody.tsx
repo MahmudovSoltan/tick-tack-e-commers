@@ -21,7 +21,8 @@ const LandingBody = () => {
     if (loading === true) {
         return <LoadingSpinner />
 
-    }
+    } 
+    
     return (
         <div className="px-[50px]">
             <Header role="landing" />
