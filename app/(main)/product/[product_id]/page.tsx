@@ -6,13 +6,13 @@ import Header from '../../header';
 import '../css/product.css';
 import ProductBody from '@/app/components/product';
 
-interface PageProps {
+interface IPageProps {
   params: {
     product_id: string;
   };
 }
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params }: IPageProps) {
   const { product_id } = params;
 
   return (
