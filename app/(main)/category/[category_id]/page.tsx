@@ -1,20 +1,23 @@
-// ❌ 'use client' sil, çünki bu server komponent olacaq
-export const dynamic = "force-dynamic";
+// app/(main)/category/[category_id]/page.tsx
+
+export const dynamic = "force-dynamic"; // SSR və ya ISR dəstəyi üçün əlavə olunur
 
 import CategoriesBody from "@/app/components/categories/CategoriesBody";
 import Header from "../../header";
-import '../css/category.css'
+import '../css/category.css';
 import LinkComponent from "@/app/ui/links";
 
-// Bu interface serverdəki parametrləri əks etdirir
 interface PageProps {
   params: {
     category_id: string;
   };
 }
 
-export default function CategoryDetailPage({ params }: PageProps) {
-  const categoryId = Array.isArray(params.category_id) ? params.category_id[0] : params.category_id;
+// 🔧 Bura diqqət: async əlavə olunub
+export default async function CategoryDetailPage({ params }: PageProps) {
+  const categoryId = Array.isArray(params.category_id)
+    ? params.category_id[0]
+    : params.category_id;
 
   return (
     <div>
