@@ -1,5 +1,7 @@
 // app/(main)/product/[product_id]/page.tsx
 
+export const dynamic = "force-dynamic"; // SSR və ya ISR dəstəyi üçün əlavə olunur
+
 import LinkComponent from '@/app/ui/links';
 import Header from '../../header';
 import '../css/product.css';
