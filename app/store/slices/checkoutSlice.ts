@@ -40,7 +40,7 @@ export const getAllCheckout = createAsyncThunk(
 )
 export const detailCheckout = createAsyncThunk(
     "basket/deleteProduct",
-    async (id, thunkAPI) => {
+    async (id:string, thunkAPI) => {
         try {
             const response = await axiosInstance.get(`/api/tiktak/orders/user/${id}`);
             console.log(response.data);
