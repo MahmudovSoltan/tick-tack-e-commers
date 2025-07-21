@@ -1,19 +1,16 @@
+"use client"
+
 import CategoriesBody from "@/app/components/categories/CategoriesBody";
 import Header from "../../header";
 import "../css/category.css";
 import LinkComponent from "@/app/ui/links";
+import { useParams } from "next/navigation";
 
-// ✅ Next.js page üçün tip belə olmalıdır:
-interface CategoryDetailPageProps {
-  params: {
-    category_id: string;
-  };
-}
 
-export default async function CategoryDetailPage({ params }: CategoryDetailPageProps) {
-  const categoryId = Array.isArray(params.category_id)
-    ? params.category_id[0]
-    : params.category_id;
+  function CategoryDetailPage() {
+const params = useParams()
+
+console.log(params, "params in category detail page");
 
   return (
     <div>
@@ -23,9 +20,10 @@ export default async function CategoryDetailPage({ params }: CategoryDetailPageP
       <section className="categories_container">
         <div className="container mx-auto">
           <LinkComponent title="Meyvələr" />
-          <CategoriesBody id={categoryId} />
+          <CategoriesBody id={Array.isArray(params.category_id) ? params.category_id[0] : params.category_id} />
         </div>
       </section>
     </div>
   );
 }
+export default CategoryDetailPage;

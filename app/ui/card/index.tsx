@@ -21,7 +21,6 @@ const Card = ({ title, image, onclik, price, id, baskets, deleteProductFunc }: C
     const navigate = useRouter()
     const isBasketProduct = baskets?.items?.find((basket) => basket?.product?.id === id);
     const { loading } = useAppSelector((state) => state.baskets)
-    console.log(baskets,"category baskets");
 
     if (loading) {
         return <LoadingSpinner />
