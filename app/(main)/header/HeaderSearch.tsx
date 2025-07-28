@@ -2,11 +2,11 @@
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import { fetchProducts } from "@/app/store/slices/productSlice";
 
-import {useRouter, useSearchParams } from "next/navigation";
+import {useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 const HeaderSearch = () => {
-  const searchParams = useSearchParams()
+  // const searchParams = useSearchParams()
   const router = useRouter()
   const [isFocused, setIsFocused] = useState(false);
   const [searchText, setSearchText] = useState("");
@@ -39,15 +39,15 @@ const HeaderSearch = () => {
   const handleSearchChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchText(value);
-    const params = new URLSearchParams(searchParams.toString())
-    if (value) {
-      params.set("search", value)
+    // const params = new URLSearchParams(searchParams.toString())
+    // if (value) {
+    //   params.set("search", value)
 
-    } else {
-      params.delete("search")
-    }
+    // } else {
+    //   params.delete("search")
+    // }
       //  dispatch(productSearch({search:value}))
-    router.replace(`?${params.toString()}`);
+    // router.replace(`?${params.toString()}`);
   }
 
 
