@@ -46,7 +46,7 @@ const HeaderSearch = () => {
     } else {
       params.delete("search")
     }
-       dispatch(productSearch({search:value}))
+      //  dispatch(productSearch({search:value}))
     router.replace(`?${params.toString()}`);
   }
 

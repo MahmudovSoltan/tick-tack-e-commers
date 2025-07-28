@@ -52,22 +52,22 @@ export const productDetailFunc = createAsyncThunk(
     }
   }
 )
-export const productSearch = createAsyncThunk(
-  "productSearch,productSearchfunc",
-async (params:string)=>{
-  try{
-    const response = await axiosInstance.get("/api/tiktak/products",{
-      params
-    })
-    console.log(response.data);
+// export const productSearch = createAsyncThunk(
+//   "productSearch,productSearchfunc",
+// async (params:string)=>{
+//   try{
+//     const response = await axiosInstance.get("/api/tiktak/products",{
+//       params
+//     })
+//     console.log(response.data);
     
-    return response.data
-  }catch(error){
-    console.log(error);
+//     return response.data
+//   }catch(error){
+//     console.log(error);
     
-  }
-}
-)
+//   }
+// }
+// )
 // ✅ Slice
 const productSlice = createSlice({
   name: 'products',
