@@ -54,7 +54,7 @@ export const productDetailFunc = createAsyncThunk(
 )
 export const productSearch = createAsyncThunk(
   "productSearch,productSearchfunc",
-async (params:any)=>{
+async (params:string)=>{
   try{
     const response = await axiosInstance.get("/api/tiktak/products",{
       params
