@@ -3,6 +3,7 @@ import { IProduct } from '@/app/types/product.type';
 import axiosInstance from '@/app/utils/axiosInstance';
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 
+
 export interface Product {
   id: number;
   title: string;
@@ -50,6 +51,22 @@ export const productDetailFunc = createAsyncThunk(
       
     }
   }
+)
+export const productSearch = createAsyncThunk(
+  "productSearch,productSearchfunc",
+async (params:any)=>{
+  try{
+    const response = await axiosInstance.get("/api/tiktak/products",{
+      params
+    })
+    console.log(response.data);
+    
+    return response.data
+  }catch(error){
+    console.log(error);
+    
+  }
+}
 )
 // ✅ Slice
 const productSlice = createSlice({

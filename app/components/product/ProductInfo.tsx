@@ -20,7 +20,7 @@ const ProductInfo = ({ product, addbasket, deletebasket, isBasketProduct, addFav
 
     const navigate = useRouter()
 
-    console.log(product, "product");
+
 
     return (
         <div className="product_info_container">

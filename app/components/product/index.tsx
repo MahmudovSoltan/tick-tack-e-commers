@@ -24,7 +24,6 @@ const ProductBody = ({ id }: {id:string}) => {
     const { baskets } = useAppSelector((state) => state.baskets)
 
     const isBasketProduct = baskets?.items?.find((basket) => basket?.product?.id === Number(id));
-    console.log(isBasketProduct, "isBasketProduct");
 
     useEffect(() => {
         dispatch(getAllCategory())

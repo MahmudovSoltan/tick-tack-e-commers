@@ -39,8 +39,8 @@ export const profileEdit = createAsyncThunk(
     }
 )
 // ✅ Slice
-const productSlice = createSlice({
-    name: 'products',
+const profileSlice = createSlice({
+    name: 'profile',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
@@ -63,4 +63,4 @@ const productSlice = createSlice({
     },
 });
 
-export default productSlice.reducer;
+export default profileSlice.reducer;
