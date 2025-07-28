@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation"
 
 const BasketTotalAmount = ({products}) => {
-    console.log(products);
+
     
     const navigate = useRouter()
     return (

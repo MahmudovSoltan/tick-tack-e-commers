@@ -1,3 +1,5 @@
+
+
 import AccountBody from "@/app/components/account/AccountBody"
 import Header from "../header"
 import './css/account.css'

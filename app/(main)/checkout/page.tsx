@@ -1,3 +1,5 @@
+'use client'
+
 import CheckoutBody from "@/app/components/checekout/CheckoutBody"
 import Header from "../header"
 import './css/checkout.css'

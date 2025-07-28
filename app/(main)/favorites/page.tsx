@@ -1,3 +1,5 @@
+'use client'
+
 import FavoritesBody from "@/app/components/favorites/FavoritesBody"
 import Header from "../header"
 

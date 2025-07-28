@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from "react"
 import OrderDetails from "./AccountOrderDetail"
 import AccountOrderList from "./AccountOrderList"
