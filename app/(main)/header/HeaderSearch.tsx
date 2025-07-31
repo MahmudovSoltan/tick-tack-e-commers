@@ -1,7 +1,6 @@
 'use client'
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import { fetchProducts } from "@/app/store/slices/productSlice";
-import { divide } from "lodash";
 
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
