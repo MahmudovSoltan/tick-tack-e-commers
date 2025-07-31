@@ -72,7 +72,7 @@ const OrderDetails = ({ orderId ,goBack}: { orderId: string; goBack: () => void 
         { chekoutProduct && chekoutProduct?.items?.map((product, index) => (
           <div className="product-row" key={index}>
             {
-              product.product.img_url ? <Image className="!h-[67px] !w-[67px] object-cover" width={67} height={67} src={product.product.img_url} alt={product.name} />:<Image className="!h-[67px] !w-[67px] object-cover" width={67} height={67} src={image} alt={product.name+index.toString()} />
+              product.product.img_url ? <Image className="!h-[67px] !w-[67px] object-cover" width={67} height={67} src={product.product.img_url} alt={product.name + product.product.img_url} />:<Image className="!h-[67px] !w-[67px] object-cover" width={67} height={67} src={image} alt={product.name+index.toString()} />
             }
 
             <p>{product.product.title}</p>

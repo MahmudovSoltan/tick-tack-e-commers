@@ -25,8 +25,7 @@
   color: #e6e6e6;
 }
 .aside_top {
-
-  height: 460px;
+  height: 470px;
   border-radius: 10px;
   background-color: #ffffff;
   padding: 14px 35px 22px;
@@ -36,6 +35,34 @@
   margin-bottom: 15px;
   margin-top: 10px;
   overflow: auto;
+    transition: all .3s ease-in-out;
+}
+.aside_top::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  opacity: 0;
+}
+
+/* Scrollbar track (arka plan) */
+.aside_top::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 4px;
+}
+
+/* Scrollbar thumb (hərəkət edən hissə) */
+.aside_top::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+  transition: all .5s ease-in-out;
+}
+.aside_top:hover.aside_top::-webkit-scrollbar-thumb{
+  background-color: #555;
+}
+/* Hover zamanı thumb */
+.aside_top::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
 }
 .aside_links {
   display: flex;

@@ -13,12 +13,11 @@ interface ComponentSidebarPropsType {
 
 }
 const ComponentSidebar = ({ links, image,currentCategory }: ComponentSidebarPropsType) => {
-    console.log(currentCategory);
     
     const navigate = useRouter()
     return (
         <aside className="w-[300px]">
-            <div className="aside_top">
+            <div className="aside_top" >
             <ul className="aside_links">
                 {
                     links?.map((link, index) => (

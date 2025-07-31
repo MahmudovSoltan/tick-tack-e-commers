@@ -63,7 +63,7 @@ const FavoritesBody = () => {
         </div>
       </div>
       <div className="flex mt-3.5 pb-14">
-        <div className="w-[70%] flex items-center flex-wrap gap-5 mt-[10px]">
+        <div className="w-[70%] max-h-max flex items-center flex-wrap gap-5 mt-[10px]">
           {
             favosites.map((favorite) => (
               <Card

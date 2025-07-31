@@ -1,8 +1,9 @@
 'use client'
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import { fetchProducts } from "@/app/store/slices/productSlice";
+import { divide } from "lodash";
 
-import {useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 const HeaderSearch = () => {
@@ -12,7 +13,7 @@ const HeaderSearch = () => {
   const [searchText, setSearchText] = useState("");
   const searchRef = useRef<HTMLDivElement>(null);
   const secondInputRef = useRef<HTMLInputElement>(null);
-  const {products}= useAppSelector((state)=>state.products)
+  const { products } = useAppSelector((state) => state.products)
   const dispatch = useAppDispatch();
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -24,9 +25,9 @@ const HeaderSearch = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(fetchProducts())
-  },[])
+  }, [])
   useEffect(() => {
     if (isFocused && secondInputRef.current) {
       secondInputRef.current.focus();
@@ -46,12 +47,12 @@ const HeaderSearch = () => {
     // } else {
     //   params.delete("search")
     // }
-      //  dispatch(productSearch({search:value}))
+    //  dispatch(productSearch({search:value}))
     // router.replace(`?${params.toString()}`);
   }
 
 
-  
+
   return (
     <div className="search_input relative" ref={searchRef}>
       <input
@@ -72,16 +73,19 @@ const HeaderSearch = () => {
               onChange={handleSearchChange}
               className="search-input"
             />
+
             <div className="serach_content">
-              {filteredResults.map((item) => (
-                <div  onClick={()=>router.push(`/product/${item.id}`)}  className="search-item" key={item.id}>
+              {filteredResults.length > 0 ? filteredResults.map((item) => (
+                <div onClick={() => router.push(`/product/${item.id}`)} className="search-item" key={item.id}>
                   <img src={item?.img_url} alt={item.title} className="item-img" />
                   <div className="item-info">
                     <p className="item-title">{item.title}</p>
                     <p className="item-price">{item.price}</p>
                   </div>
                 </div>
-              ))}
+              )) : <div className="text-center my-3.5">
+                Məhsul tapılmadı
+              </div>}
 
             </div>
           </div>
