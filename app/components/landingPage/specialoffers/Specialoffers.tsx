@@ -1,10 +1,8 @@
 import { IDataType } from '@/app/types/camping.type';
 import styles from '../css/landig.module.css'
 
-interface PropsType {
-    data?: IDataType | null;
-}
-const Specialoffers = ({ data }: PropsType) => {
+
+const Specialoffers = ({ data }: {data:IDataType}) => {
     const filtered = data?.data?.filter((item) => item.img_url).slice(0, 6);
     return (
         <section>
