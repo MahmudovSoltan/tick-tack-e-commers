@@ -4,7 +4,7 @@ import LandingBody from "./components/landing/LandingBody";
 
 
 
- function Landing() {
+export default function Landing() {
 
   return (
     <div className="container mx-auto">
@@ -15,5 +15,3 @@ import LandingBody from "./components/landing/LandingBody";
     </div>
   );
 }
-
-export default Landing()
