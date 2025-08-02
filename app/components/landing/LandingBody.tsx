@@ -13,7 +13,6 @@ import { getAllCampaigns } from "@/app/store/slices/campingSlice"
 
 const LandingBody = () => {
     const { data, loading, } = useAppSelector((state) => state.campings);
-    console.log(loading, "loading");
     const dispatch = useAppDispatch();
     useEffect(() => {
         dispatch(getAllCampaigns())
@@ -28,7 +27,7 @@ const LandingBody = () => {
             <Header role="landing" />
             <SwiperCarusel data={data} />
 
-            <Specialoffers />
+            <Specialoffers  data={data}   />
             <Ourindicators />
             <Footer />
         </div>

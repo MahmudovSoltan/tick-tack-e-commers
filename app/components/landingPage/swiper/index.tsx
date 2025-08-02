@@ -12,6 +12,7 @@ import { Navigation, Autoplay } from 'swiper/modules';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { IDataType } from '@/app/types/camping.type';
+import Image from 'next/image';
 
 
 
@@ -20,11 +21,9 @@ interface PropsType {
 }
 const SwiperCarusel = ({ data }: PropsType) => {
 
-    console.log(data, "data in swiper");
 
-    const filtered = data?.data?.filter((item) => item.img_url).slice(1, 5);
+    const filtered = data?.data?.filter((item) => item.img_url).slice(0, 5);
     const navigate = useRouter()
-    const bg_url = "https://www.bigbasketco.com/wp-content/uploads/good-l-corp-what-americas-best-grocery-stores-have-in-common.jpg"
     const [user, setUser] = useState<string | null>(null);
 
     useEffect(() => {
@@ -37,10 +36,8 @@ const SwiperCarusel = ({ data }: PropsType) => {
         } else if (!user) {
             navigate.push("/auth")
         }
-
     }
 
-    console.log(data);
     
     return (
         <section>
@@ -54,73 +51,63 @@ const SwiperCarusel = ({ data }: PropsType) => {
                     disableOnInteraction: false,
                 }}
                 modules={[Navigation, Autoplay]}
-                className={`mySwiper  home_top_swiper`}
+                className={`mySwiper home_top_swiper ${styles.main_swiper}`}
 
             >
-
-                {
-                    filtered?.map((item) => (
-                        <SwiperSlide key={item.id}>
-                            <div className={styles.home_swiper_card} style={{ backgroundImage: `url(${bg_url})`, backgroundPosition: "center" }}>
+                <SwiperSlide>
+                       <div  className={`${styles.home_swiper_card}   ${styles.home_swiper_zero}`}>
                                 <div className={styles.home_swiper_card_content}>
-                                    <h2>{item.title}</h2>
-                                    <p>{item.description}</p>
+                                    <h2>{filtered?.[0].title}</h2>
+                                    <p>{filtered?.[0].description}</p>
                                     <button className={styles.swiper_btn} onClick={handleNavigate}>Ətraflı</button>
                                 </div>
-                                {/* <div className={styles.home_swiper_card_image}>
+                                <div className={styles.home_swiper_card_image}>
                                     <Image
-                                        src={item.img_url}
+                                        src={filtered?.[0].img_url}
                                         width={200}
                                         height={200}
-                                        alt={item.title}
+                                        alt={filtered?.[0].title}
                                         className={styles.card_image}
                                     />
-                                </div> */}
+                                </div>
                             </div>
-                        </SwiperSlide>
-
-                    ))
-                }
-
-                {/* <SwiperSlide>
-                    <div className={styles.home_swiper_card}>
-                        <div className={styles.home_swiper_card_content}>
-                            <h2>
-                                Tick tack e-commers
-                            </h2>
-                            <p>
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo, cum.
-                            </p>
-                            <button className={styles.swiper_btn}>Ətraflı</button>
-                        </div>
-                    </div>
-                </SwiperSlide> */}
-                {/* <SwiperSlide>
-                    <div className={styles.home_swiper_card}>
-                        <div className={styles.home_swiper_card_content}>
-                            <h2>
-                                Tick tack e-commers
-                            </h2>
-                            <p>
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo, cum.
-                            </p>
-                            <button className={styles.swiper_btn}>Ətraflı</button>
-                        </div>
-                    </div>
-                </SwiperSlide> */}
-                {/* <SwiperSlide>
-                    <div className={styles.home_swiper_card}>
-                        <div className={styles.home_swiper_card_content}>
-                            <h2>
-                                Tick tack e-commers
-                            </h2>
-                            <p>
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo, cum.
-                            </p>
-                            <button className={styles.swiper_btn}>Ətraflı</button>
-                        </div>
-                    </div>
-                </SwiperSlide> */}
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className={`${styles.home_swiper_card}   ${styles.home_swiper_one}`}>
+                                <div className={`${styles.home_swiper_card_content} `}>
+                                    <h2>{filtered?.[1].title}</h2>
+                                    <p>{filtered?.[1].description}</p>
+                                    <button className={styles.swiper_btn} onClick={handleNavigate}>Ətraflı</button>
+                                </div>
+                                <div className={styles.home_swiper_card_image}>
+                                    <Image
+                                        src={filtered?.[1].img_url}
+                                        width={200}
+                                        height={200}
+                                        alt={filtered?.[1].title}
+                                        className={styles.card_image}
+                                    />
+                                </div>
+                            </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                   <div className={`${styles.home_swiper_card}   ${styles.home_swiper_two}`}>
+                                <div className={styles.home_swiper_card_content}>
+                                    <h2>{filtered?.[2].title}</h2>
+                                    <p>{filtered?.[2].description}</p>
+                                    <button className={styles.swiper_btn} onClick={handleNavigate}>Ətraflı</button>
+                                </div>
+                                <div className={styles.home_swiper_card_image}>
+                                    <Image
+                                        src={filtered?.[2].img_url}
+                                        width={200}
+                                        height={200}
+                                        alt={filtered?.[2].title}
+                                        className={styles.card_image}
+                                    />
+                                </div>
+                            </div>
+                </SwiperSlide>
 
             </Swiper>
 
