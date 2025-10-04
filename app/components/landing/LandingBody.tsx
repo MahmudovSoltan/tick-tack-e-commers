@@ -9,8 +9,6 @@ import { useAppDispatch, useAppSelector } from "@/app/store/hooks"
 import LoadingSpinner from "../lodanig/LoadingSpinner"
 import { useEffect } from "react"
 import { getAllCampaigns } from "@/app/store/slices/campingSlice"
-
-
 const LandingBody = () => {
     const { data, loading, } = useAppSelector((state) => state.campings);
     const dispatch = useAppDispatch();
@@ -23,7 +21,7 @@ const LandingBody = () => {
     }
 
     return (
-        <div className="px-[50px]">
+        <div>
             <Header role="landing" />
             <SwiperCarusel data={data} />
 

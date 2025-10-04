@@ -85,3 +85,24 @@
   object-fit: cover;
   border-radius: 4px;
 }
+@media screen and (max-width: 1024px) {
+  .home_right_card {
+    width: 130px;
+    height: 130px;
+  }
+  .home_left {
+    width: 300px;
+  }
+  .home_left_title {
+    font-size: 24px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .home_left {
+    display: none;
+  }
+  .home_right_container {
+    width: 100%;
+    justify-content: center;
+  }
+}

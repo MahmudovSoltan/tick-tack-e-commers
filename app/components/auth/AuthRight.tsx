@@ -33,7 +33,7 @@ const AuthRight = () => {
 
     return (
         <div className="auth_right_container">
-            <div>
+            <div className="auth_right_content">
                 <AuthRIghtHeader setTab={setTab} tab={tab} />
                 <Currenttab />
 

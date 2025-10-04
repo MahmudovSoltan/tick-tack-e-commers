@@ -150,3 +150,9 @@
   line-height: 100%;
   text-align: center;
 }
+  @media screen and (max-width: 1280px) {
+  .my_basket_container{
+    display: none;
+    
+  }
+  }

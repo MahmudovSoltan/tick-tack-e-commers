@@ -75,3 +75,29 @@ label {
   font-size: 26px;
   line-height: 100%;
 }
+@media screen and (max-width: 1024px) {
+  .auth_left_container {
+   background-image: none;
+   height: fit-content;
+   background-color: transparent;
+    width: 100%;
+  }
+  .auth_right_container {
+    width: 100%;
+    padding: 0 20px;
+    height: 100vh;
+  }
+  .auth_right_content{
+    max-width: 566px;
+  }
+}
+@media screen and (max-width: 650px) {
+ 
+  .auth_right_content{
+    max-width: 100%;
+  }
+  .auth_header_container li{
+    font-size: 20px;
+  }
+}
+
